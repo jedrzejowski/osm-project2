@@ -6,7 +6,7 @@
 
 <?import dwa.adamy.ui.ModuleChooser?>
 
-<AnchorPane prefHeight="478.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8.0.121"
+<AnchorPane prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwa.adamy.Main">
     <children>
 

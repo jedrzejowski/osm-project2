@@ -39,7 +39,7 @@ public class Main extends Application {
         rightPane = (Pane) root.lookup("#rightPane");
 
         stage.setTitle("OSM - Projekt v2");
-        stage.setScene(new Scene(root, 300, 275));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
