@@ -1,6 +1,7 @@
 package dwa.adamy.modules.pacjenci;
 
 import dwa.adamy.Main;
+import dwa.adamy.controll.PatientEditForm;
 import dwa.adamy.database.Patient;
 import dwa.adamy.modules.Module;
 import javafx.event.ActionEvent;
@@ -37,6 +38,11 @@ public class PacjenciModule extends Module {
             @Override
             public void onSave(Patient patient) {
 
+            }
+
+            @Override
+            public void onCancel() {
+                subPane.setContent(null);
             }
         });
         subPane.setContent(editor);

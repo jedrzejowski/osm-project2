@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class Patient {
 
+    private int uniqueID = -1;
     private String name1 = "";
     private String name2 = "";
     private Pesel pesel = null;
@@ -27,6 +28,14 @@ public class Patient {
         pesel = orginal.pesel;
         sex = orginal.sex;
         insuranceType = orginal.insuranceType;
+    }
+
+    public int getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(int uniqueID) {
+        this.uniqueID = uniqueID;
     }
 
     /**
