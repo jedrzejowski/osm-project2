@@ -1,8 +1,6 @@
 package dwa.adamy;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import dwa.adamy.modules.Module;
-import dwa.adamy.ui.ModuleChooser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +26,7 @@ public class Main extends Application {
 
     }
 
-    Pane leftPane, rightPane;
+    private Pane leftPane, rightPane;
 
     @Override
     public void start(Stage stage) throws Exception {

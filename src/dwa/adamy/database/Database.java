@@ -1,6 +1,7 @@
 package dwa.adamy.database;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
@@ -11,6 +12,16 @@ public class Database {
 
     public static Database getInstance() {
         return ourInstance;
+    }
+
+    //endregion
+
+    //region Singleton
+
+    private Calendar calendar = new Calendar();
+
+    public Calendar getCalendar() {
+        return calendar;
     }
 
     //endregion
@@ -27,6 +38,12 @@ public class Database {
 
     //region Patient
 
+    private List<Patient> patientList = new ArrayList<>();
+
+    public List<Patient> getList() {
+        return patientList;
+    }
+
     public List<Patient> searchPatient(String selector) {
 
         return null;
@@ -36,8 +53,11 @@ public class Database {
         return null;
     }
 
-    public void addPatient(Patient patient) {
+    public void addPatient(Patient patient) throws PatientAlreadyExistsException {
+        patientList.add(patient);
+    }
 
+    public class PatientAlreadyExistsException extends Exception {
     }
 
     //endregion

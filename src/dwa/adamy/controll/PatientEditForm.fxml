@@ -18,6 +18,7 @@
         <TextProp id="imie" label="Imię:"/>
         <TextProp id="nazwisko" label="Nazwisko:"/>
 
+        <TextProp id="miasto" label="Miasto:"/>
         <TextProp id="kodPocztowy" label="Kod pocztowy:" maxLength="5"/>
         <TextProp id="ulica" label="Ulica:"/>
 

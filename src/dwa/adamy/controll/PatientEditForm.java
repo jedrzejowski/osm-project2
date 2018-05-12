@@ -16,7 +16,7 @@ public class PatientEditForm extends VBox {
     private Patient patient;
 
     @FXML
-    private TextProp peselProp, imieProp, nazwiskoProp, unProp, kodPocztowyProp, ulicaProp, numerDomuProp, numerMieszkaniaProp, telefonProp;
+    private TextProp peselProp, imieProp, nazwiskoProp, unProp, kodPocztowyProp, ulicaProp, numerDomuProp, numerMieszkaniaProp, telefonProp, miastoProp;
 
     public PatientEditForm() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PatientEditForm.fxml"));
@@ -34,9 +34,10 @@ public class PatientEditForm extends VBox {
             imieProp = (TextProp) lookup("#imie");
             nazwiskoProp = (TextProp) lookup("#nazwisko");
 
-            kodPocztowyProp = nazwiskoProp = (TextProp) lookup("#kodPocztowy");
+            kodPocztowyProp = (TextProp) lookup("#kodPocztowy");
             kodPocztowyProp.setInputInterface(TextProp.NaturalInputI);
 
+            miastoProp = (TextProp) lookup("#miasto");
             ulicaProp = (TextProp) lookup("#ulica");
             numerDomuProp = (TextProp) lookup("#numerDomu");
             numerMieszkaniaProp = (TextProp) lookup("#numerMieszkania");
@@ -51,27 +52,40 @@ public class PatientEditForm extends VBox {
 
     @FXML
     private void saveAction(ActionEvent event) {
-        anInterface.onSave(getPatient());
+
+        validateAndSavePatient();
+
+        if (anInterface != null)
+            anInterface.onSave(patient);
     }
 
     @FXML
     private void cancelAction(ActionEvent event) {
-        anInterface.onCancel();
+
+        if (anInterface != null)
+            anInterface.onCancel();
+    }
+
+    private void validateAndSavePatient() {
+        if (patient == null) patient = new Patient();
+
+        //TODO tu trzeba logike czy dane są poprawne
+
+        patient.setPesel((Pesel) peselProp.getValue());
+        patient.setName1(imieProp.getValue().toString());
+        patient.setName2(nazwiskoProp.getValue().toString());
+
+        patient.setMiasto(miastoProp.getValue().toString());
+        patient.setKodPocztowy(kodPocztowyProp.getValue().toString());
+        patient.setNumerDomu(numerDomuProp.getValue().toString());
+        patient.setNumerMieszkania(numerMieszkaniaProp.getValue().toString());
+        patient.setUlica(ulicaProp.getValue().toString());
+        patient.setTelefon(telefonProp.getValue().toString());
     }
 
     //region Interface
 
-    Interface anInterface = new Interface() {
-        @Override
-        public void onSave(Patient patient) {
-
-        }
-
-        @Override
-        public void onCancel() {
-
-        }
-    };
+    Interface anInterface = null;
 
     public interface Interface {
         void onSave(Patient patient);
@@ -81,31 +95,21 @@ public class PatientEditForm extends VBox {
 
     public void setInterface(Interface anInterface) {
         this.anInterface = anInterface;
-
     }
 
     //endregion
 
     //region Getter && Setter
 
-    public Patient getPatient() {
-        patient.setPesel((Pesel) peselProp.getValue());
-        patient.setName1(imieProp.getValue().toString());
-        patient.setName2(nazwiskoProp.getValue().toString());
-
-        return patient;
-    }
-
     public void setPatient(Patient patient) {
 
         // Nowy pacjent
         if (patient == null) {
-            this.patient = new Patient();
+            patient = new Patient();
             peselProp.setDisable(false);
-            return;
         }
 
-        this.patient = new Patient(patient);
+        this.patient = patient;
 
         unProp.setValue(patient.getUniqueID());
 
@@ -114,6 +118,13 @@ public class PatientEditForm extends VBox {
 
         imieProp.setValue(patient.getName1());
         nazwiskoProp.setValue(patient.getName2());
+
+        miastoProp.setValue(patient.getMiasto());
+        kodPocztowyProp.setValue(patient.getKodPocztowy());
+        ulicaProp.setValue(patient.getUlica());
+        numerDomuProp.setValue(patient.getNumerDomu());
+        numerMieszkaniaProp.setValue(patient.getNumerMieszkania());
+        telefonProp.setValue(patient.getTelefon());
     }
 
     //endregion

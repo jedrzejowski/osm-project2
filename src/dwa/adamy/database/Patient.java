@@ -7,35 +7,26 @@ import java.util.*;
  */
 public class Patient {
 
-    private int uniqueID = -1;
+
+    private String uniqueID = UUID.randomUUID().toString();
     private String name1 = "";
     private String name2 = "";
+    private String miasto = "";
+    private String kodPocztowy = "";
+    private String numerDomu = "";
+    private String numerMieszkania = "";
+    private String ulica = "";
+    private String telefon = "";
     private Pesel pesel = null;
     private Sex sex = Sex.FEMALE;
     private InsuranceType insuranceType = InsuranceType.NONE;
 
     public Patient() {
+        System.out.println(":" + uniqueID);
     }
 
-    /**
-     * Tworzy głęboką kopie pacjenta
-     *
-     * @param orginal pacjent do skopiowania
-     */
-    public Patient(Patient orginal) {
-        name1 = orginal.name1;
-        name2 = orginal.name2;
-        pesel = orginal.pesel;
-        sex = orginal.sex;
-        insuranceType = orginal.insuranceType;
-    }
-
-    public int getUniqueID() {
+    public String getUniqueID() {
         return uniqueID;
-    }
-
-    public void setUniqueID(int uniqueID) {
-        this.uniqueID = uniqueID;
     }
 
     /**
@@ -117,6 +108,63 @@ public class Patient {
      */
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public String getKodPocztowy() {
+        return kodPocztowy;
+    }
+
+    public void setKodPocztowy(String kodPocztowy) {
+        this.kodPocztowy = kodPocztowy;
+    }
+
+    public String getNumerDomu() {
+        return numerDomu;
+    }
+
+    public void setNumerDomu(String numerDomu) {
+        this.numerDomu = numerDomu;
+    }
+
+    public String getNumerMieszkania() {
+        return numerMieszkania;
+    }
+
+    public void setNumerMieszkania(String numerMieszkania) {
+        this.numerMieszkania = numerMieszkania;
+    }
+
+    public String getUlica() {
+        return ulica;
+    }
+
+    public void setUlica(String ulica) {
+        this.ulica = ulica;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getMiasto() {
+        return miasto;
+    }
+
+    public void setMiasto(String miasto) {
+        this.miasto = miasto;
+    }
+
+    public String getAdress() {
+        String out = "";
+        out += "ul. " + getUlica() + " " + getNumerDomu();
+        if (getNumerMieszkania().length() > 0)
+            out += "/" + getNumerMieszkania();
+        out += ", " + getKodPocztowy() + " " + getMiasto();
+        return out;
     }
 
     /**
