@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.Pane?>
 <fx:root prefHeight="500" prefWidth="500" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -18,7 +19,7 @@
                         <Button mnemonicParsing="false" onAction="#newPatient" text="Nowy pacjent" />
                     </children>
                 </HBox>
-                <ScrollPane id="subPane" prefHeight="9999.0" />
+                <Pane id="content" prefHeight="9999.0" />
             </children>
         </VBox>
     </children>

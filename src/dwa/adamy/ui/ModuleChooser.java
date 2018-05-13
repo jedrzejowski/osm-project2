@@ -24,6 +24,7 @@ public class ModuleChooser extends VBox {
         }
     }
 
+    @FXML
     private void openPacjenci(ActionEvent event) {
         Main.getInstance().openModule(PacjenciModule.class);
     }

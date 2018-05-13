@@ -25,7 +25,7 @@ public class PacjenciModule extends Module {
 
     State myState;
 
-    Pane subPane = null;
+    Pane content = null;
 
     public PacjenciModule() {
 
@@ -36,7 +36,7 @@ public class PacjenciModule extends Module {
         try {
             fxmlLoader.load();
 
-            subPane = (Pane) lookup("#subPane");
+            content = (Pane) lookup("#content");
 
             setSetState(State.LIST);
 
@@ -46,7 +46,8 @@ public class PacjenciModule extends Module {
     }
 
     private void setContent(Node node){
-
+        content.getChildren().clear();
+        content.getChildren().add(node);
     }
 
     public void setSetState(State state) {
