@@ -50,7 +50,7 @@ public class Main extends Application {
             if (currentModule != null) {
 
                 if (currentModule.canClose()) {
-                    rightPane.getChildren().removeAll();
+                    rightPane.getChildren().clear();
                 } else {
                     return;
                 }

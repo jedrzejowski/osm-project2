@@ -1,36 +1,46 @@
 package dwa.adamy.modules.terminarz;
 
+import dwa.adamy.Loader;
+import dwa.adamy.database.Patient;
 import dwa.adamy.modules.Module;
-import dwa.adamy.modules.pacjenci.PacjenciModule;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class TerminarzModule extends Module {
 
-    Pane content = null;
+    //region Singleton
 
-    public TerminarzModule() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PacjenciModule.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
+    private static TerminarzModule ourInstance = null;
 
-        try {
-            fxmlLoader.load();
-
-            content = (Pane) lookup("#content");
-
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+    public static TerminarzModule getInstance() {
+        return ourInstance;
     }
 
-    void clearLists(){
+    //endregion
+
+    @FXML
+    private Pane content;
+
+    public TerminarzModule() {
+        ourInstance = this;
+        Loader.loadFX(this);
+
+        addList(new VisitList());
+    }
+
+    void clearLists() {
         content.getChildren().clear();
     }
 
-    void addList(VisitList list){
+    void addList(VisitList list) {
         content.getChildren().add(list);
+    }
+
+    public Patient getSelectedPatient(){
+        return new Patient();
     }
 }

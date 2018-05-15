@@ -1,6 +1,5 @@
 package dwa.adamy.modules.pacjenci;
 
-import dwa.adamy.Main;
 import dwa.adamy.controll.PatientEditForm;
 import dwa.adamy.controll.PatientList;
 import dwa.adamy.database.Database;
@@ -10,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;

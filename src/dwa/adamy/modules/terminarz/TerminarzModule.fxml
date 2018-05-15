@@ -7,26 +7,29 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="500" prefWidth="500" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.121"
+<fx:root prefHeight="500" prefWidth="500" type="AnchorPane"
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+         xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              AnchorPane.topAnchor="0.0">
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0" id="vbox">
 
             <children>
 
                 <HBox>
                     <children>
-                        <Button mnemonicParsing="false" text="Button"/>
-                        <Button mnemonicParsing="false" text="Button"/>
+                        <Button mnemonicParsing="false" text="Huj"/>
+                        <Button mnemonicParsing="false" text="Dupa"/>
                     </children>
                 </HBox>
 
-                <ScrollPane>
+                <ScrollPane >
                     <content>
-                        <Pane id="content" prefHeight="9999.0"/>
+                        <Pane fx:id="content" />
                     </content>
                 </ScrollPane>
 
