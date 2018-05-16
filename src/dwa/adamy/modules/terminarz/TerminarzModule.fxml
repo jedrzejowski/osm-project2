@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import dwa.adamy.controll.PatientFinder?>
 <fx:root prefHeight="500" prefWidth="500" type="AnchorPane"
          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
@@ -22,6 +23,7 @@
 
                 <HBox>
                     <children>
+                        <PatientFinder />
                         <Button mnemonicParsing="false" text="Huj"/>
                         <Button mnemonicParsing="false" text="Dupa"/>
                     </children>

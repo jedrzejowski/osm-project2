@@ -7,10 +7,9 @@
          xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-        <VBox>
+        <VBox id="header">
             <Label fx:id="label1" text="wtorek, 21 stycznia 2017"/>
             <Label fx:id="label2" text="dr.Cisak"/>
-            <Label fx:id="label3"/>
         </VBox>
 
         <VBox fx:id="content">

@@ -1,0 +1,17 @@
+@import "../../Variables";
+
+VisitRow {
+	-fx-padding: $padding;
+
+	#hourLabel {
+		-fx-font-weight: bold;
+	}
+
+	&.even {
+		-fx-background-color: $colorGreen;
+	}
+
+	&.odd {
+		-fx-background-color: $colorGreen2;
+	}
+}

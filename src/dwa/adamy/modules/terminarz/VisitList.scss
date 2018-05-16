@@ -1,0 +1,27 @@
+@import "../../Variables";
+
+VisitList {
+	-fx-min-width: 250px;
+
+	#header {
+		-fx-padding: $padding;
+		-fx-background-color: $colorBlue;
+		-fx-alignment: center;
+
+		Label {
+			-fx-text-fill: $textOnBlue;
+			-fx-font-weight: bold;
+		}
+
+		#label1{
+			-fx-font-size: 1.3em;
+		}
+
+
+		#label1{
+			-fx-font-size: 1.2em;
+		}
+	}
+
+
+}

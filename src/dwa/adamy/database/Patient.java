@@ -1,5 +1,7 @@
 package dwa.adamy.database;
 
+import org.json.JSONObject;
+
 import java.util.*;
 
 /**
@@ -22,8 +24,37 @@ public class Patient {
     private InsuranceType insuranceType = InsuranceType.NONE;
 
     public Patient() {
-        System.out.println(":" + uniqueID);
+
     }
+
+    public Patient(JSONObject obj) {
+        uniqueID = obj.getString("uniqueID");
+        pesel = new Pesel(obj.getString("pesel"));
+        name1 = obj.getString("name1");
+        name2 = obj.getString("name2");
+        miasto = obj.getString("miasto");
+        kodPocztowy = obj.getString("kodPocztowy");
+        numerDomu = obj.getString("numerDomu");
+        numerMieszkania = obj.getString("numerMieszkania");
+        ulica = obj.getString("ulica");
+        telefon = obj.getString("telefon");
+    }
+
+    public JSONObject toJSON() {
+        JSONObject obj = new JSONObject();
+        obj.put("uniqueID", uniqueID);
+        obj.put("pesel", pesel.toString());
+        obj.put("name1", name1);
+        obj.put("name2", name2);
+        obj.put("miasto", miasto);
+        obj.put("kodPocztowy", kodPocztowy);
+        obj.put("numerDomu", numerDomu);
+        obj.put("numerMieszkania", numerMieszkania);
+        obj.put("ulica", ulica);
+        obj.put("telefon", telefon);
+        return obj;
+    }
+
 
     public String getUniqueID() {
         return uniqueID;
@@ -187,7 +218,7 @@ public class Patient {
 
     @Override
     public String toString() {
-        return String.format("Patient{%s %s, %s}", getName1(), getName2(), getPesel());
+        return String.format("%s, %s %s", getPesel(), getName1(), getName2());
     }
 
     private static int DebugTestcounter = 0;

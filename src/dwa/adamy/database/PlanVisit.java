@@ -3,6 +3,7 @@ package dwa.adamy.database;
 public class PlanVisit {
     private int day, month, year;
     private int hour, minute, length;
+    private String patientID;
 
     //region Getters Setters
 
@@ -52,6 +53,14 @@ public class PlanVisit {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
     //endregion

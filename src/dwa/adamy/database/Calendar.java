@@ -1,12 +1,17 @@
 package dwa.adamy.database;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Calendar {
 
-    public Calendar() {
-        //TODO usunąc to w wersji release
+    public Calendar(JSONObject obj) {
 
+    }
+
+    public JSONObject toJSON(){
+        return null;
     }
 
     private ArrayList<PlanVisit> calendarArray = new ArrayList<>();

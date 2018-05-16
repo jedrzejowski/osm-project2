@@ -1,5 +1,6 @@
 package dwa.adamy;
 
+import dwa.adamy.database.Database;
 import dwa.adamy.modules.Module;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,9 +22,11 @@ public class Main extends Application {
     //endregion
 
     public static void main(String[] args) {
+        Database.getInstance().load();
 
         launch(args);
 
+        Database.getInstance().save();
     }
 
     private Pane leftPane, rightPane;

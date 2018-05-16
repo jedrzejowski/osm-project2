@@ -6,7 +6,7 @@
 <fx:root onMouseClicked="#mouseClicked" type="HBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-        <Label fx:id="hourLabel" text="00:00" />
+        <Label fx:id="hourLabel" id="hourLabel" text="00:00" />
         <Label fx:id="patientLabel" />
 
 
