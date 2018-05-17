@@ -1,8 +1,8 @@
-package dwa.adamy.controll;
+package dwa.adamy.controll.patient;
 
+import dwa.adamy.Loader;
 import dwa.adamy.database.Patient;
 import dwa.adamy.database.Pesel;
-import dwa.adamy.modules.Module;
 import dwa.adamy.ui.prop.TextProp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,35 +19,11 @@ public class PatientEditForm extends VBox {
     private TextProp peselProp, imieProp, nazwiskoProp, unProp, kodPocztowyProp, ulicaProp, numerDomuProp, numerMieszkaniaProp, telefonProp, miastoProp;
 
     public PatientEditForm() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PatientEditForm.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
+        Loader.loadFX(this);
 
-        try {
-            fxmlLoader.load();
-
-            unProp = (TextProp) lookup("#un");
-
-            peselProp = (TextProp) lookup("#pesel");
-            peselProp.setInputInterface(TextProp.PeselInputI);
-
-            imieProp = (TextProp) lookup("#imie");
-            nazwiskoProp = (TextProp) lookup("#nazwisko");
-
-            kodPocztowyProp = (TextProp) lookup("#kodPocztowy");
-            kodPocztowyProp.setInputInterface(TextProp.NaturalInputI);
-
-            miastoProp = (TextProp) lookup("#miasto");
-            ulicaProp = (TextProp) lookup("#ulica");
-            numerDomuProp = (TextProp) lookup("#numerDomu");
-            numerMieszkaniaProp = (TextProp) lookup("#numerMieszkania");
-
-            telefonProp = (TextProp) lookup("#telefon");
-            telefonProp.setInputInterface(TextProp.NaturalInputI);
-
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        peselProp.setInputInterface(TextProp.PeselInputI);
+        kodPocztowyProp.setInputInterface(TextProp.NaturalInputI);
+        telefonProp.setInputInterface(TextProp.NaturalInputI);
     }
 
     @FXML

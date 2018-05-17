@@ -105,4 +105,8 @@ public class Database {
     }
 
     //endregion
+
+    //region Examination
+
+    //endregion
 }

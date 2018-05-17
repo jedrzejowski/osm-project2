@@ -1,17 +1,15 @@
 package dwa.adamy.modules.pacjenci;
 
-import dwa.adamy.controll.PatientEditForm;
-import dwa.adamy.controll.PatientList;
+import dwa.adamy.Loader;
+import dwa.adamy.controll.patient.PatientEditForm;
+import dwa.adamy.controll.patient.PatientList;
 import dwa.adamy.database.Database;
 import dwa.adamy.database.Patient;
 import dwa.adamy.modules.Module;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
-import java.io.IOException;
 
 public class PacjenciModule extends Module {
 
@@ -23,27 +21,16 @@ public class PacjenciModule extends Module {
 
     State myState;
 
-    Pane content = null;
+    @FXML
+    private Pane content;
 
     public PacjenciModule() {
+        Loader.loadFX(this);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PacjenciModule.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        try {
-            fxmlLoader.load();
-
-            content = (Pane) lookup("#content");
-
-            setSetState(State.LIST);
-
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        setSetState(State.LIST);
     }
 
-    private void setContent(Node node){
+    private void setContent(Node node) {
         content.getChildren().clear();
         content.getChildren().add(node);
     }

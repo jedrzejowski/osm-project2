@@ -7,7 +7,6 @@
 <fx:root type="HBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-
         <ComboBox fx:id="combo" prefWidth="150.0" editable="true"/>
 
         <Button fx:id="button" text="Szukaj"/>

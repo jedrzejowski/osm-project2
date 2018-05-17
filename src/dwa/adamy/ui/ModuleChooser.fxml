@@ -7,8 +7,7 @@
     <children>
         <Button fx:id="pacjenci" onAction="#openPacjenci" prefWidth="999" text="Pacjenci" />
         <Button prefWidth="999" onAction="#openTerminarz"  text="Terminarz" />
-        <Button prefWidth="999" text="Badania" />
+        <Button prefWidth="999" onAction="#openBadania" text="Badania" />
         <Button prefWidth="999" text="Wizyty" />
-        <Button prefWidth="999" text="Zabiegi" />
     </children>
 </fx:root>

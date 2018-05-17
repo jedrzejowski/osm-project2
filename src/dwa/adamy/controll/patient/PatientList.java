@@ -1,5 +1,6 @@
-package dwa.adamy.controll;
+package dwa.adamy.controll.patient;
 
+import dwa.adamy.Loader;
 import dwa.adamy.database.Database;
 import dwa.adamy.database.Patient;
 import javafx.collections.FXCollections;
@@ -13,16 +14,7 @@ import java.io.IOException;
 
 public class PatientList extends TableView {
     public PatientList() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PatientList.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
-
-        try {
-            fxmlLoader.load();
-
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+        Loader.loadFX(this);
 
         setRowFactory(tv -> {
             TableRow<Patient> row = new TableRow<>();
