@@ -1,6 +1,7 @@
 package dwa.adamy.database;
 
 public class PlanVisit {
+    private String docotrId;
     private int day, month, year;
     private int hour, minute, length;
     private String patientID;
@@ -61,6 +62,21 @@ public class PlanVisit {
 
     public void setPatientID(String patientID) {
         this.patientID = patientID;
+
+        //TODO oskryptować dodanie do bazy daanych
+        if (this.patientID.length() > 0) {
+
+        } else {
+
+        }
+    }
+
+    public String getDocotrId() {
+        return docotrId;
+    }
+
+    public void setDocotrId(String docotrId) {
+        this.docotrId = docotrId;
     }
 
     //endregion

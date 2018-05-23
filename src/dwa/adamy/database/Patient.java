@@ -198,6 +198,20 @@ public class Patient {
         return out;
     }
 
+    @Override
+    public int hashCode() {
+        return uniqueID.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Patient)
+            return getUniqueID().equals(((Patient) object).getUniqueID());
+
+        return false;
+    }
+
+
     /**
      * Pobiera typ ubezpieczenia
      *

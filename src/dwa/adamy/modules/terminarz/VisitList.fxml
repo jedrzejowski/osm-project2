@@ -16,8 +16,6 @@
 
         </VBox>
 
-        <Button fx:id="addButton" text="+"/>
-
     </children>
 
 </fx:root>

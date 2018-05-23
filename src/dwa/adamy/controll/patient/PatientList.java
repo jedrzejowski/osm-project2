@@ -33,7 +33,7 @@ public class PatientList extends TableView {
     }
 
     public void reloadPatients() {
-        setItems(FXCollections.observableList(Database.getInstance().getList()));
+        setItems(FXCollections.observableList(Database.getInstance().getPatientList()));
     }
 
     //region Interface

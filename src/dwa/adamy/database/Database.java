@@ -79,7 +79,7 @@ public class Database {
 
     private List<Patient> patientList = new ArrayList<>();
 
-    public List<Patient> getList() {
+    public List<Patient> getPatientList() {
         return patientList;
     }
 

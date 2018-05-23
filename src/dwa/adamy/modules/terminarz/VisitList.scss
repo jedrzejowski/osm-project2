@@ -1,7 +1,9 @@
 @import "../../Variables";
 
 VisitList {
-	-fx-min-width: 250px;
+	-fx-min-width: 350px;
+	-fx-padding: $padding;
+
 
 	#header {
 		-fx-padding: $padding;
@@ -13,15 +15,13 @@ VisitList {
 			-fx-font-weight: bold;
 		}
 
-		#label1{
+		#label1 {
 			-fx-font-size: 1.3em;
 		}
 
-
-		#label1{
+		#label1 {
 			-fx-font-size: 1.2em;
 		}
 	}
-
 
 }

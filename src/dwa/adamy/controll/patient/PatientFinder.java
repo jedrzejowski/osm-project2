@@ -23,19 +23,8 @@ public class PatientFinder extends HBox {
     public PatientFinder() {
         Loader.loadFX(this);
 
-        combo.getEditor().textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (oldValue.equals(newValue)) return;
+        combo.setItems(FXCollections.observableArrayList(Database.getInstance().getPatientList()));
 
-
-            if (newValue.length() > 2) {
-                combo.hide();
-                combo.setItems(FXCollections.observableArrayList(Database.getInstance().findPatientsBySelector(newValue)));
-                combo.show();
-            }
-
-            lastVal = oldValue;
-
-        });
     }
 
     public Patient getPatient(){
