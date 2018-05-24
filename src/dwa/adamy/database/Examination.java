@@ -1,10 +1,12 @@
 package dwa.adamy.database;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
  * Klasa obiektów reprezentujących dane badania krwi
- *
+ * <p>
  * Dlaczego wartości parametrów są string'ami a nie int'ami?
  * Otóż dokumentacja medyczna ma być tworzona prze lekarzy, lub im podobnych. Aplikacja nie powinna ograniczać
  * możliwości tworzenia i edycji danych medycznych nie będących danymi osobowymi. To lekarz decyduje co wpisać w rubrykę
@@ -12,93 +14,61 @@ import java.util.Date;
  */
 public class Examination {
 
-    private Date date;
-    private Double erythrocytes, leukocytes, platelets;
+    private LocalDate date;
+    private LocalTime time;
+    private String result = "";
+    private String name = "";
+    private String range = "";
+    private String doctor = "";
 
-    public Examination(){
-        date = null;
-        erythrocytes = null;
-        leukocytes = null;
-        platelets = null;
+    public Examination() {
     }
 
-    /**
-     * Tworzy głęboką kopie badania
-     * @param examination badanie do sklonowania
-     */
-    public Examination(Examination examination){
-        date = examination.date;
-        erythrocytes = examination.erythrocytes;
-        leukocytes = examination.leukocytes;
-        platelets = examination.platelets;
-    }
-
-    /**
-     * Pobiera date badania
-     * @return data badania
-     */
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    /**
-     * Ustawia date badania
-     * @param date nowa data bdania
-     */
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    /**
-     * Pobiera wartość liczby erytrocytów
-     * @return liczna erytrocytów
-     */
-    public Double getErythrocytes() {
-        return erythrocytes;
+    public LocalTime getTime() {
+        return time;
     }
 
-    /**
-     * Ustawia wartość liczby erytrocytów
-     * @param erythrocytes nowa liczna erytrocytów
-     */
-    public void setErythrocytes(Double erythrocytes) {
-        this.erythrocytes = erythrocytes;
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
-    /**
-     * Pobiera wartość leukocytów
-     * @return wartość leukocytów
-     */
-    public Double getLeukocytes() {
-        return leukocytes;
+    public String getResult() {
+        return result;
     }
 
-    /**
-     * Ustawia wartość leukocytów
-     * @param leukocytes nowa wartość leukocytów
-     */
-    public void setLeukocytes(Double leukocytes) {
-        this.leukocytes = leukocytes;
+    public void setResult(String result) {
+        this.result = result;
     }
 
-    /**
-     * Pobiera liczbę płytek krwi
-     * @return liczba płytek krwi
-     */
-    public Double getPlatelets() {
-        return platelets;
+    public String getRange() {
+        return range;
     }
 
-    /**
-     * Ustawia liczbę płytek krwi
-     * @param platelets nowa liczba płytek krwi
-     */
-    public void setPlatelets(Double platelets) {
-        this.platelets = platelets;
+    public void setRange(String range) {
+        this.range = range;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Examination{%s}", getDate());
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -2,6 +2,7 @@ package dwa.adamy.ui;
 
 import dwa.adamy.Loader;
 import dwa.adamy.Main;
+import dwa.adamy.modules.badania.BadaniaModule;
 import dwa.adamy.modules.hospitalizacje.HospitalizacjeModule;
 import dwa.adamy.modules.pacjenci.PacjenciModule;
 import dwa.adamy.modules.terminarz.TerminarzModule;
@@ -26,7 +27,7 @@ public class ModuleChooser extends VBox {
 
     @FXML
     private void openBadania(ActionEvent event) {
-        //Main.getInstance().openModule(TerminarzModule.class);
+        Main.getInstance().openModule(BadaniaModule.class);
     }
 
     @FXML

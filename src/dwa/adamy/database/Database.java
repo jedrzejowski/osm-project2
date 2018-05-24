@@ -75,6 +75,8 @@ public class Database {
         }
     }
 
+    //endregion
+
     //region Patient
 
     private List<Patient> patientList = new ArrayList<>();
@@ -92,7 +94,7 @@ public class Database {
         return null;
     }
 
-    public List<Patient> findPatientsBySelector(String selector){
+    public List<Patient> findPatientsBySelector(String selector) {
         //TODO napisać tą funkcje
         return patientList;
     }
@@ -107,6 +109,17 @@ public class Database {
     //endregion
 
     //region Examination
+
+    private List<Examination> examinationList = new ArrayList<>();
+
+    public List<Examination> getExaminationList() {
+        return examinationList;
+    }
+
+    public void addExamination(Examination examination) {
+        examinationList.add(examination);
+    }
+
 
     //endregion
 }

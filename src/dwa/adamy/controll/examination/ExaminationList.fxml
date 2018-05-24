@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1"
+
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+    <top>
+
+        <DatePicker fx:id="datePicker"/>
+
+    </top>
+
+    <center>
+        <ScrollPane>
+            <content>
+
+                <GridPane fx:id="contentGrid"
+                          xmlns="http://javafx.com/javafx/8.0.121"
+                          xmlns:fx="http://javafx.com/fxml/1">
+
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="65.0"/>
+                        <ColumnConstraints prefWidth="150.0"/>
+                        <ColumnConstraints prefWidth="150.0"/>
+                        <ColumnConstraints prefWidth="100.0"/>
+                        <ColumnConstraints prefWidth="100.0"/>
+                        <ColumnConstraints/>
+                    </columnConstraints>
+
+                    <rowConstraints>
+                        <RowConstraints/>
+                    </rowConstraints>
+
+                    <children>
+                        <Label text="Godzina" GridPane.columnIndex="0"/>
+                        <Label text="Nazwa badania" GridPane.columnIndex="1"/>
+                        <Label text="Zakres" GridPane.columnIndex="2"/>
+                        <Label text="Wyniki" GridPane.columnIndex="3"/>
+                        <Label text="Personel badający"
+                               GridPane.columnIndex="4"/>
+                        <Label text="Akcja" GridPane.columnIndex="5"/>
+                    </children>
+                </GridPane>
+
+            </content>
+        </ScrollPane>
+    </center>
+
+</fx:root>

@@ -27,7 +27,7 @@ public class PacjenciModule extends Module {
     public PacjenciModule() {
         Loader.loadFX(this);
 
-        setSetState(State.LIST);
+        setState(State.LIST);
     }
 
     private void setContent(Node node) {
@@ -35,11 +35,11 @@ public class PacjenciModule extends Module {
         content.getChildren().add(node);
     }
 
-    public void setSetState(State state) {
-        setSetState(state, null);
+    public void setState(State state) {
+        setState(state, null);
     }
 
-    public void setSetState(State state, Object data) {
+    public void setState(State state, Object data) {
         switch (state) {
 
             case LIST:
@@ -48,7 +48,7 @@ public class PacjenciModule extends Module {
                 list.setInterface(new PatientList.Interface() {
                     @Override
                     public void onSelectPatient(Patient patient) {
-                        setSetState(State.EDITPATIENT, patient);
+                        setState(State.EDITPATIENT, patient);
                     }
                 });
 
@@ -70,12 +70,12 @@ public class PacjenciModule extends Module {
                             //TODO Komunikat o istniejąceym pacjencie
                         }
 
-                        setSetState(State.LIST);
+                        setState(State.LIST);
                     }
 
                     @Override
                     public void onCancel() {
-                        setSetState(State.LIST);
+                        setState(State.LIST);
                     }
                 });
 
@@ -91,12 +91,12 @@ public class PacjenciModule extends Module {
                 editor.setInterface(new PatientEditForm.Interface() {
                     @Override
                     public void onSave(Patient patient) {
-                        setSetState(State.LIST);
+                        setState(State.LIST);
                     }
 
                     @Override
                     public void onCancel() {
-                        setSetState(State.LIST);
+                        setState(State.LIST);
                     }
                 });
 
@@ -112,6 +112,6 @@ public class PacjenciModule extends Module {
 
     @FXML
     private void newPatient(ActionEvent event) {
-        setSetState(State.NEWPATIENT);
+        setState(State.NEWPATIENT);
     }
 }
