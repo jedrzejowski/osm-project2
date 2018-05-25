@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="500" prefWidth="500" type="TableView" xmlns="http://javafx.com/javafx/8.0.121"
+<fx:root prefHeight="500" prefWidth="500" type="BorderPane"
+         xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
-    <columns>
+    <top>
+        <HBox>
+            <children>
+                <TextField/>
+                <Button mnemonicParsing="false" text="Wyszukaj"/>
+                <Button mnemonicParsing="false" onAction="#newPatient"
+                        text="Nowy pacjent"/>
+            </children>
+        </HBox>
+    </top>
 
-        <TableColumn prefWidth="150.0" text="Pesel">
-            <cellValueFactory>
-                <PropertyValueFactory property="pesel" />
-            </cellValueFactory>
-        </TableColumn>
+    <center>
 
-        <TableColumn prefWidth="75.0" text="Imię">
-            <cellValueFactory>
-                <PropertyValueFactory property="name1" />
-            </cellValueFactory>
-        </TableColumn>
+        <TableView fx:id="tableView">
 
-        <TableColumn prefWidth="150.0" text="Nazwisko">
-            <cellValueFactory>
-                <PropertyValueFactory property="name2" />
-            </cellValueFactory>
-        </TableColumn>
+            <columns>
+
+                <TableColumn prefWidth="105.0" text="Pesel">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="pesel"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn prefWidth="75.0" text="Imię">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name1"/>
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn prefWidth="125.0" text="Nazwisko">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name2"/>
+                    </cellValueFactory>
+                </TableColumn>
 
 
-        <TableColumn prefWidth="150.0" text="Adress">
-            <cellValueFactory>
-                <PropertyValueFactory property="adress" />
-            </cellValueFactory>
-        </TableColumn>
+                <TableColumn prefWidth="300.0" text="Adress">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="adress"/>
+                    </cellValueFactory>
+                </TableColumn>
 
-    </columns>
+            </columns>
+        </TableView>
+    </center>
 </fx:root>

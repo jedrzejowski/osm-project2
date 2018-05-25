@@ -10,8 +10,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Database {
 
@@ -51,6 +53,11 @@ public class Database {
             patients.put(p.toJSON());
         obj.put("patients", patients);
 
+        JSONArray examinations = new JSONArray();
+        for (Examination e : examinationList)
+            examinations.put(e.toJSON());
+        obj.put("examinations", examinations);
+
         return obj;
     }
 
@@ -66,12 +73,20 @@ public class Database {
         try {
             JSONObject obj = new JSONObject(new String(Files.readAllBytes(path)));
 
-            JSONArray patients = obj.getJSONArray("patients");
-            for (Object p : patients)
-                patientList.add(new Patient((JSONObject) p));
+            if (obj.has("patients")) {
+                JSONArray patients = obj.getJSONArray("patients");
+                for (Object p : patients)
+                    patientList.add(new Patient((JSONObject) p));
+            }
+
+            if (obj.has("examinations")) {
+                JSONArray examinations = obj.getJSONArray("examinations");
+                for (Object e : examinations)
+                    examinationList.add(new Examination((JSONObject) e));
+            }
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
     }
 
@@ -120,6 +135,35 @@ public class Database {
         examinationList.add(examination);
     }
 
+    public List<Examination> getExaminationFromDate(LocalDate date) {
+        return examinationList
+                .stream()
+                .filter(e -> e.getDate().equals(date))
+                .collect(Collectors.toList());
+    }
+
+
+    //endregion
+
+
+    //region
+
+    static List<Doctor> doctorList = null;
+
+    public List<Doctor> getDoctors() {
+        if (doctorList != null)
+            return doctorList;
+
+        doctorList = new ArrayList<>();
+
+        doctorList.add(new Doctor("Tymon", "Rubel", "001"));
+        doctorList.add(new Doctor("Jan", "Marzec", "002"));
+        doctorList.add(new Doctor("Waldemar", "Smolik", "003"));
+        doctorList.add(new Doctor("Andrzej", "Domański", "004"));
+        doctorList.add(new Doctor("Tomasz", "Olszewski", "005"));
+
+        return doctorList;
+    }
 
     //endregion
 }

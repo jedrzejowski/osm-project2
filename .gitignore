@@ -27,5 +27,6 @@ hs_err_pid*
 out/
 *.css
 *.css.map
+.sass-cache
 
 database.json

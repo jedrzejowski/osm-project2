@@ -1,8 +1,9 @@
-package dwa.adamy.modules.terminarz;
+package dwa.adamy.controll.calendar;
 
 import dwa.adamy.Loader;
 import dwa.adamy.database.Patient;
 import dwa.adamy.database.PlanVisit;
+import dwa.adamy.modules.terminarz.TerminarzModule;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
@@ -25,7 +26,7 @@ public class VisitRow extends HBox {
     }
 
     private void updateUI() {
-        hourLabel.setText(String.format("%02d:%02d", visit.getHour(), visit.getMinute()));
+        hourLabel.setText(visit.getTime().toString());
     }
 
     public PlanVisit getVisit() {

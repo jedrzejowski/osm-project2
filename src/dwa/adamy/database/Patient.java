@@ -34,8 +34,8 @@ public class Patient {
         name2 = obj.getString("name2");
         miasto = obj.getString("miasto");
         kodPocztowy = obj.getString("kodPocztowy");
-        numerDomu = obj.getString("numerDomu");
-        numerMieszkania = obj.getString("numerMieszkania");
+        numerDomu = obj.get("numerDomu").toString();
+        numerMieszkania = obj.get("numerMieszkania").toString();
         ulica = obj.getString("ulica");
         telefon = obj.getString("telefon");
     }

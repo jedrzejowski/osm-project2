@@ -1,8 +1,9 @@
 package dwa.adamy.database;
 
+import org.json.JSONObject;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 /**
  * Klasa obiektów reprezentujących dane badania krwi
@@ -16,12 +17,22 @@ public class Examination {
 
     private LocalDate date;
     private LocalTime time;
+    private String patientID = "";
     private String result = "";
     private String name = "";
     private String range = "";
     private String doctor = "";
 
     public Examination() {
+    }
+
+    public Examination(JSONObject object) {
+        date = LocalDate.parse(object.getString("date"));
+        time = LocalTime.parse(object.getString("time"));
+        result = object.getString("result");
+        name = object.getString("name");
+        range = object.getString("range");
+        doctor = object.getString("doctor");
     }
 
     public LocalDate getDate() {
@@ -71,4 +82,24 @@ public class Examination {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getPatientID() {
+        return patientID;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject obj = new JSONObject();
+        obj.put("date", date.toString());
+        obj.put("time", time.toString());
+        obj.put("doctor", doctor);
+        obj.put("range", range);
+        obj.put("name", name);
+        obj.put("result", result);
+        return obj;
+    }
+
 }

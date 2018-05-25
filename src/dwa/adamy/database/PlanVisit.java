@@ -1,51 +1,32 @@
 package dwa.adamy.database;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class PlanVisit {
-    private String docotrId;
-    private int day, month, year;
-    private int hour, minute, length;
+    private String doctorId;
+    private LocalDate date;
+    private LocalTime time;
+    private int length;
     private String patientID;
 
     //region Getters Setters
 
-    public int getDay() {
-        return day;
+
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public int getMonth() {
-        return month;
+    public LocalTime getTime() {
+        return time;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public int getHour() {
-        return hour;
-    }
-
-    public void setHour(int hour) {
-        this.hour = hour;
-    }
-
-    public int getMinute() {
-        return minute;
-    }
-
-    public void setMinute(int minute) {
-        this.minute = minute;
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public int getLength() {
@@ -71,12 +52,16 @@ public class PlanVisit {
         }
     }
 
-    public String getDocotrId() {
-        return docotrId;
+    public String getDoctorId() {
+        return doctorId;
     }
 
-    public void setDocotrId(String docotrId) {
-        this.docotrId = docotrId;
+    public void setDoctor(Doctor doctor) {
+        this.doctorId = doctor.getId();
+    }
+
+    public void setDoctorId(String docotrId) {
+        this.doctorId = docotrId;
     }
 
     //endregion

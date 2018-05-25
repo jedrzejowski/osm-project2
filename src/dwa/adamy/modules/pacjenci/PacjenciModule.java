@@ -9,6 +9,7 @@ import dwa.adamy.modules.Module;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public class PacjenciModule extends Module {
@@ -22,7 +23,7 @@ public class PacjenciModule extends Module {
     State myState;
 
     @FXML
-    private Pane content;
+    private BorderPane content;
 
     public PacjenciModule() {
         Loader.loadFX(this);
@@ -31,8 +32,7 @@ public class PacjenciModule extends Module {
     }
 
     private void setContent(Node node) {
-        content.getChildren().clear();
-        content.getChildren().add(node);
+        content.setCenter(node);
     }
 
     public void setState(State state) {
@@ -49,6 +49,11 @@ public class PacjenciModule extends Module {
                     @Override
                     public void onSelectPatient(Patient patient) {
                         setState(State.EDITPATIENT, patient);
+                    }
+
+                    @Override
+                    public void onNewPatient() {
+                        setState(State.NEWPATIENT);
                     }
                 });
 
@@ -110,8 +115,4 @@ public class PacjenciModule extends Module {
         myState = state;
     }
 
-    @FXML
-    private void newPatient(ActionEvent event) {
-        setState(State.NEWPATIENT);
-    }
 }

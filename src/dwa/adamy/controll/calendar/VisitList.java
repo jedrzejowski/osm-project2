@@ -1,24 +1,24 @@
-package dwa.adamy.modules.terminarz;
+package dwa.adamy.controll.calendar;
 
 import dwa.adamy.Loader;
+import dwa.adamy.database.Doctor;
 import dwa.adamy.database.PlanVisit;
+import dwa.adamy.modules.terminarz.TerminarzModule;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class VisitList extends VBox {
 
     private TerminarzModule module;
-    private String doctorId;
+    private Doctor doctor;
     private LocalDate date;
 
     @FXML
@@ -26,23 +26,22 @@ public class VisitList extends VBox {
     @FXML
     private Label label1, label2;
 
-    public VisitList(TerminarzModule module, LocalDate date, String doctorId) {
+    public VisitList(TerminarzModule module, LocalDate date, Doctor doctor) {
         Loader.loadFX(this);
         this.module = module;
-        this.doctorId = doctorId;
+        this.doctor = doctor;
         this.date = date;
 
         label1.setText(date.format(DateTimeFormatter.ofPattern("ccc, d LLL YYYY")).toLowerCase());
+        label2.setText("dr " + doctor.getFullName());
 
         //Generacja terminów
         for (int h = 8; h < 18; h++) {
             for (int m = 0; m < 60; m += 15) {
                 PlanVisit visit = new PlanVisit();
-                visit.setDay(date.getDayOfMonth());
-                visit.setMonth(date.getMonthValue());
-                visit.setYear(date.getYear());
-                visit.setHour(h);
-                visit.setMinute(m);
+                visit.setDate(date);
+                visit.setTime(LocalTime.of(h, m));
+                visit.setDoctor(doctor);
                 content.getChildren().add(new VisitRow(module, visit));
             }
         }
@@ -64,10 +63,6 @@ public class VisitList extends VBox {
 
             q = !q;
         }
-    }
-
-    public void setDoctor(String title) {
-
     }
 
     public void setVisitList(ArrayList<PlanVisit> list) {

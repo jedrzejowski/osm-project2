@@ -10,6 +10,8 @@ import dwa.adamy.modules.Module;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class BadaniaModule extends Module {
@@ -39,12 +41,16 @@ public class BadaniaModule extends Module {
 
         switch (state) {
 
-            case LIST:
+            case LIST: {
+                LocalDate date = LocalDate.now();
+                if (data != null) date = (LocalDate) data;
+
                 ExaminationList list = new ExaminationList(new ExaminationList.Interface() {
                     @Override
-                    public void onAdd(Date time) {
+                    public void onAdd(LocalDate date, LocalTime time) {
                         Examination e = new Examination();
-                        e.setDate(time);
+                        e.setDate(date);
+                        e.setTime(time);
                         setState(State.NEWEXAMINATION, e);
                     }
 
@@ -52,29 +58,50 @@ public class BadaniaModule extends Module {
                     public void onEdit(Examination examination) {
                         setState(State.EDITEXAMINATION, examination);
                     }
-                });
+                }, date);
                 getChildren().add(list);
                 break;
+            }
 
-            case NEWEXAMINATION:
+            case NEWEXAMINATION: {
+                LocalDate date = ((Examination) data).getDate();
+
                 ExaminationEditor editor = new ExaminationEditor(new ExaminationEditor.Interface() {
                     @Override
                     public void onSave(Examination examination) {
                         Database.getInstance().addExamination(examination);
-                        setState(State.LIST);
+                        setState(State.LIST, examination.getDate());
                     }
 
                     @Override
                     public void onCancel() {
-                        setState(State.LIST);
+                        setState(State.LIST, date);
+                    }
+                });
+
+                editor.setExamination((Examination) data);
+                getChildren().add(editor);
+                break;
+            }
+
+            case EDITEXAMINATION: {
+                LocalDate date = ((Examination) data).getDate();
+
+                ExaminationEditor editor = new ExaminationEditor(new ExaminationEditor.Interface() {
+                    @Override
+                    public void onSave(Examination examination) {
+                        setState(State.LIST, date);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        setState(State.LIST, date);
                     }
                 });
                 editor.setExamination((Examination) data);
                 getChildren().add(editor);
                 break;
-
-            case EDITEXAMINATION:
-                break;
+            }
         }
     }
 

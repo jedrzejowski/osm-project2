@@ -37,13 +37,18 @@
                     </rowConstraints>
 
                     <children>
-                        <Label text="Godzina" GridPane.columnIndex="0"/>
-                        <Label text="Nazwa badania" GridPane.columnIndex="1"/>
-                        <Label text="Zakres" GridPane.columnIndex="2"/>
-                        <Label text="Wyniki" GridPane.columnIndex="3"/>
+                        <Label text="Godzina" GridPane.columnIndex="0"
+                               GridPane.rowIndex="0"/>
+                        <Label text="Nazwa badania" GridPane.columnIndex="1"
+                               GridPane.rowIndex="0"/>
+                        <Label text="Zakres" GridPane.columnIndex="2"
+                               GridPane.rowIndex="0"/>
+                        <Label text="Wyniki" GridPane.columnIndex="3"
+                               GridPane.rowIndex="0"/>
                         <Label text="Personel badający"
-                               GridPane.columnIndex="4"/>
-                        <Label text="Akcja" GridPane.columnIndex="5"/>
+                               GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                        <Label text="Akcja" GridPane.columnIndex="5"
+                               GridPane.rowIndex="0"/>
                     </children>
                 </GridPane>
 

@@ -1,17 +1,16 @@
 package dwa.adamy.modules.terminarz;
 
 import dwa.adamy.Loader;
+import dwa.adamy.controll.calendar.VisitList;
 import dwa.adamy.controll.patient.PatientFinder;
+import dwa.adamy.database.Database;
+import dwa.adamy.database.Doctor;
 import dwa.adamy.database.Patient;
 import dwa.adamy.modules.Module;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 public class TerminarzModule extends Module {
@@ -62,11 +61,10 @@ public class TerminarzModule extends Module {
 
         clearLists();
 
-        addList(new VisitList(this, date, "001"));
-        addList(new VisitList(this, date, "002"));
-        addList(new VisitList(this, date, "003"));
-        addList(new VisitList(this, date, "004"));
-        addList(new VisitList(this, date, "005"));
+        for (Doctor doctor : Database.getInstance().getDoctors()) {
+
+            addList(new VisitList(this, date, doctor));
+        }
     }
 
     public Patient getSelectedPatient() {
