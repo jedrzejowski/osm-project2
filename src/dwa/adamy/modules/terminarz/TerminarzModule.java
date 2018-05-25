@@ -49,7 +49,7 @@ public class TerminarzModule extends Module {
         content.getChildren().clear();
     }
 
-    void addList(VisitList list) {
+    public void addList(VisitList list) {
         content.getChildren().add(list);
     }
 
@@ -62,7 +62,6 @@ public class TerminarzModule extends Module {
         clearLists();
 
         for (Doctor doctor : Database.getInstance().getDoctors()) {
-
             addList(new VisitList(this, date, doctor));
         }
     }

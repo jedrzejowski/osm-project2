@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import dwa.adamy.ui.prop.TimeProp?>
+<?import dwa.adamy.ui.prop.DoctorProp?>
 <fx:root prefHeight="400.0" prefWidth="600.0" type="VBox"
          xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
@@ -18,7 +19,7 @@
 
         <TextProp fx:id="nameProp" label="Nazwa badania:"/>
         <TextProp fx:id="rangeProp" label="Zakres badania:"/>
-        <TextProp fx:id="doctorProp" label="Doktor badający:"/>
+        <DoctorProp fx:id="doctorProp" label="Doktor badający:"/>
         <TextProp fx:id="resultProp" label="Wynik badania:"/>
 
         <HBox alignment="TOP_RIGHT">

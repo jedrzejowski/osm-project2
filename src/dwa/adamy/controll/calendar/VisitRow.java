@@ -9,14 +9,13 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 
 
 public class VisitRow extends HBox {
     private TerminarzModule module;
     private PlanVisit visit;
     @FXML
-    private Label hourLabel, patientLabel;
+    private Label timeLabel, patientLabel;
 
     public VisitRow(TerminarzModule module, PlanVisit visit) {
         Loader.loadFX(this);
@@ -26,7 +25,11 @@ public class VisitRow extends HBox {
     }
 
     private void updateUI() {
-        hourLabel.setText(visit.getTime().toString());
+        timeLabel.setText(visit.getTime().toString());
+
+        if (visit.getPatientID().length() > 0)
+            patientLabel.setText(visit.getPatient().toString());
+        else patientLabel.setText("");
     }
 
     public PlanVisit getVisit() {
@@ -41,13 +44,13 @@ public class VisitRow extends HBox {
 
             if (patient == null) return;
 
-            visit.setPatientID(patient.getUniqueID());
-            patientLabel.setText(patient.toString());
+            visit.setPatient(patient);
+            updateUI();
         }
 
         if (event.getButton() == MouseButton.SECONDARY) {
-            visit.setPatientID("");
-            patientLabel.setText("");
+            visit.setPatient(null);
+            updateUI();
         }
     }
 }

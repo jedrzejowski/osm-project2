@@ -3,8 +3,9 @@
 VisitRow {
 	-fx-padding: $padding;
 
-	#hourLabel {
+	#timeLabel {
 		-fx-font-weight: bold;
+		-fx-padding: 0 $paddingH 0 0;
 	}
 
 	&.even {

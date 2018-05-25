@@ -21,7 +21,7 @@ public class Examination {
     private String result = "";
     private String name = "";
     private String range = "";
-    private String doctor = "";
+    private String doctorID = "";
 
     public Examination() {
     }
@@ -32,7 +32,7 @@ public class Examination {
         result = object.getString("result");
         name = object.getString("name");
         range = object.getString("range");
-        doctor = object.getString("doctor");
+        doctorID = object.getString("doctorID");
     }
 
     public LocalDate getDate() {
@@ -67,12 +67,18 @@ public class Examination {
         this.range = range;
     }
 
-    public String getDoctor() {
-        return doctor;
+    public String getDoctorID() {
+        return doctorID;
     }
 
-    public void setDoctor(String doctor) {
-        this.doctor = doctor;
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
+    }
+    public void setDoctor(Doctor doctor) {
+        this.doctorID = doctor.getId();
+    }
+    public Doctor getDoctor(){
+        return Database.getInstance().getDoctorByID(doctorID);
     }
 
     public String getName() {
@@ -95,7 +101,7 @@ public class Examination {
         JSONObject obj = new JSONObject();
         obj.put("date", date.toString());
         obj.put("time", time.toString());
-        obj.put("doctor", doctor);
+        obj.put("doctorID", doctorID);
         obj.put("range", range);
         obj.put("name", name);
         obj.put("result", result);

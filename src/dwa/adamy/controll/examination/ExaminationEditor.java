@@ -3,6 +3,7 @@ package dwa.adamy.controll.examination;
 import dwa.adamy.Loader;
 import dwa.adamy.database.Examination;
 import dwa.adamy.ui.prop.DateProp;
+import dwa.adamy.ui.prop.DoctorProp;
 import dwa.adamy.ui.prop.TextProp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,9 @@ public class ExaminationEditor extends VBox {
     @FXML
     DateProp dateProp;
     @FXML
-    TextProp nameProp, rangeProp, doctorProp, resultProp;
+    TextProp nameProp, rangeProp, resultProp;
+    @FXML
+    DoctorProp doctorProp;
 
     private Examination examination;
 
@@ -26,7 +29,7 @@ public class ExaminationEditor extends VBox {
         examination.setDate(dateProp.getValue());
         examination.setName(nameProp.getValue().toString());
         examination.setRange(rangeProp.getValue().toString());
-        examination.setDoctor(doctorProp.getValue().toString());
+        examination.setDoctor(doctorProp.getValue());
         examination.setResult(resultProp.getValue().toString());
 
         return examination;
@@ -38,7 +41,7 @@ public class ExaminationEditor extends VBox {
         dateProp.setValue(examination.getDate());
         nameProp.setValue(examination.getName());
         rangeProp.setValue(examination.getRange());
-        doctorProp.setValue(examination.getDoctor());
+        doctorProp.setValueByID(examination.getDoctorID());
         resultProp.setValue(examination.getResult());
     }
 

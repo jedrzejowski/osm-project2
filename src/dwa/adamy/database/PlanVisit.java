@@ -1,17 +1,37 @@
 package dwa.adamy.database;
 
+import org.json.JSONObject;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class PlanVisit {
-    private String doctorId;
+    private String doctorId = "";
     private LocalDate date;
     private LocalTime time;
-    private int length;
-    private String patientID;
+    private String patientID = "";
+
+    public PlanVisit() {
+    }
+
+
+    public PlanVisit(JSONObject obj) {
+        doctorId = obj.getString("doctorId");
+        patientID = obj.getString("patientID");
+        date = LocalDate.parse(obj.getString("date"));
+        time = LocalTime.parse(obj.getString("time"));
+    }
+
+    public JSONObject toJSON() {
+        JSONObject obj = new JSONObject();
+        obj.put("doctorId", doctorId);
+        obj.put("patientID", patientID);
+        obj.put("date", date.toString());
+        obj.put("time", time.toString());
+        return obj;
+    }
 
     //region Getters Setters
-
 
     public LocalDate getDate() {
         return date;
@@ -29,14 +49,6 @@ public class PlanVisit {
         this.time = time;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
     public String getPatientID() {
         return patientID;
     }
@@ -44,12 +56,23 @@ public class PlanVisit {
     public void setPatientID(String patientID) {
         this.patientID = patientID;
 
-        //TODO oskryptować dodanie do bazy daanych
-        if (this.patientID.length() > 0) {
+        if (this.patientID.length() > 0)
+            Database.getInstance().addPlanVisit(this);
+        else
+            Database.getInstance().removePlanVisit(this);
 
-        } else {
+    }
 
-        }
+    public Patient getPatient() {
+        return Database.getInstance().getPatientByID(patientID);
+    }
+
+    public void setPatient(Patient patient) {
+
+        if (patient == null)
+            setPatientID("");
+        else
+            setPatientID(patient.getUniqueID());
     }
 
     public String getDoctorId() {
@@ -65,4 +88,5 @@ public class PlanVisit {
     }
 
     //endregion
+
 }

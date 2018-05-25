@@ -3,11 +3,7 @@ package dwa.adamy.controll.examination;
 import dwa.adamy.Loader;
 import dwa.adamy.database.Database;
 import dwa.adamy.database.Examination;
-import dwa.adamy.lib.DateUtils;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -86,7 +82,7 @@ public class ExaminationList extends BorderPane {
         contentGrid.add(label, 3, rowI);
         labels.add(label);
 
-        label = new Label(exam.getDoctor());
+        label = new Label(exam.getDoctor().getFullName());
         contentGrid.add(label, 4, rowI);
         labels.add(label);
 

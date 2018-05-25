@@ -1,6 +1,7 @@
 package dwa.adamy.controll.calendar;
 
 import dwa.adamy.Loader;
+import dwa.adamy.database.Database;
 import dwa.adamy.database.Doctor;
 import dwa.adamy.database.PlanVisit;
 import dwa.adamy.modules.terminarz.TerminarzModule;
@@ -36,14 +37,8 @@ public class VisitList extends VBox {
         label2.setText("dr " + doctor.getFullName());
 
         //Generacja terminów
-        for (int h = 8; h < 18; h++) {
-            for (int m = 0; m < 60; m += 15) {
-                PlanVisit visit = new PlanVisit();
-                visit.setDate(date);
-                visit.setTime(LocalTime.of(h, m));
-                visit.setDoctor(doctor);
-                content.getChildren().add(new VisitRow(module, visit));
-            }
+        for (PlanVisit planVisit : Database.getInstance().getVisitsFromDay(date, doctor)) {
+            content.getChildren().add(new VisitRow(module, planVisit));
         }
 
         updateUI();

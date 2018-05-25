@@ -40,4 +40,8 @@ public class Doctor {
         return getName1() + " " + getName2();
     }
 
+    @Override
+    public String toString() {
+        return getFullName();
+    }
 }
