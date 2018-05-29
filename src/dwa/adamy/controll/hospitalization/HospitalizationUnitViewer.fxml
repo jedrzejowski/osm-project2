@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="VBox" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+
+        <VBox id="header">
+            <Label fx:id="label1"/>
+            <Label fx:id="label2"/>
+        </VBox>
+
+        <GridPane fx:id="gridPane">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="65.0"/>
+                <ColumnConstraints prefWidth="350.0"/>
+                <ColumnConstraints prefWidth="100.0"/>
+                <ColumnConstraints/>
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints/>
+            </rowConstraints>
+
+            <children>
+                <Label text="Godzina" GridPane.columnIndex="0"
+                       GridPane.rowIndex="0"/>
+                <Label text="Dane" GridPane.columnIndex="1"
+                       GridPane.rowIndex="0"/>
+                <Label text="Akcja" GridPane.columnIndex="2"
+                       GridPane.rowIndex="0"/>
+            </children>
+
+        </GridPane>
+
+    </children>
+
+</fx:root>

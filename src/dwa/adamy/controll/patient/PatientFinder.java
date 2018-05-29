@@ -28,6 +28,10 @@ public class PatientFinder extends HBox {
     }
 
     public Patient getPatient(){
-        return combo.getSelectionModel().getSelectedItem();
+        return combo.getValue();
+    }
+
+    public void setPatient(Patient patient){
+        combo.setValue(patient);
     }
 }

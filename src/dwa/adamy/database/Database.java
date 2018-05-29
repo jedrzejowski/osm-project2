@@ -37,28 +37,35 @@ public class Database {
 
     //region Save and Load
 
-    public JSONObject toJSON() {
+    private JSONObject toJSON() {
         JSONObject obj = new JSONObject();
 
         {
-            JSONArray patients = new JSONArray();
+            JSONArray list = new JSONArray();
             for (Patient p : patientList)
-                patients.put(p.toJSON());
-            obj.put("patients", patients);
+                list.put(p.toJSON());
+            obj.put("patients", list);
         }
 
         {
-            JSONArray visits = new JSONArray();
+            JSONArray list = new JSONArray();
             for (PlanVisit planVisit : planVisits)
-                visits.put(planVisit.toJSON());
-            obj.put("planVisits", visits);
+                list.put(planVisit.toJSON());
+            obj.put("planVisits", list);
         }
 
         {
-            JSONArray examinations = new JSONArray();
+            JSONArray list = new JSONArray();
+            for (Hospitalization h : getHospitalizationList())
+                list.put(h.toJSON());
+            obj.put("hospitalizations", list);
+        }
+
+        {
+            JSONArray list = new JSONArray();
             for (Examination e : examinationList)
-                examinations.put(e.toJSON());
-            obj.put("examinations", examinations);
+                list.put(e.toJSON());
+            obj.put("examinations", list);
         }
 
         return obj;
@@ -94,6 +101,11 @@ public class Database {
                     planVisits.add(new PlanVisit((JSONObject) e));
             }
 
+            if (obj.has("hospitalizations")) {
+                JSONArray visits = obj.getJSONArray("hospitalizations");
+                for (Object e : visits)
+                    hospitalizationList.add(new Hospitalization((JSONObject) e));
+            }
 
         } catch (IOException e) {
             //throw new RuntimeException(e);
@@ -184,6 +196,58 @@ public class Database {
                 return doc;
         }
         return null;
+    }
+
+    //endregion
+
+    //region Hospitalization
+
+    private List<HospitalizationUnit> hospitalizationUnitList = null;
+
+    public List<HospitalizationUnit> getHospitalizationUnitList() {
+        if (hospitalizationUnitList != null)
+            return hospitalizationUnitList;
+
+        hospitalizationUnitList = new ArrayList<>();
+
+        hospitalizationUnitList.add(new HospitalizationUnit("Sala 1", "001"));
+        hospitalizationUnitList.add(new HospitalizationUnit("Sala 2", "002"));
+        hospitalizationUnitList.add(new HospitalizationUnit("Sala 3", "003"));
+        hospitalizationUnitList.add(new HospitalizationUnit("Sala 4", "004"));
+        hospitalizationUnitList.add(new HospitalizationUnit("Sala 5", "005"));
+        hospitalizationUnitList.add(new HospitalizationUnit("Sala 6", "006"));
+
+        return hospitalizationUnitList;
+    }
+
+    public HospitalizationUnit getHospitalizationUnitByID(String value) {
+        for (HospitalizationUnit hUnit : getHospitalizationUnitList())
+            if (hUnit.getId().equals(value)) return hUnit;
+
+        return null;
+    }
+
+    private List<Hospitalization> hospitalizationList = new ArrayList<>();
+
+    public List<Hospitalization> getHospitalizationList() {
+        return hospitalizationList;
+    }
+
+    public void addHospitalization(Hospitalization hospitalization) {
+        hospitalizationList.add(hospitalization);
+    }
+
+    public List<Hospitalization> getHospitalizationListFromDate(LocalDate date, HospitalizationUnit unit) {
+        List<Hospitalization> list = new ArrayList<>();
+
+        for (Hospitalization h : getHospitalizationList()) {
+            if (h.getFromDate().isAfter(date)) continue;
+            if (h.getToDate().isBefore(date)) continue;
+            if (unit != null && !h.getUnitID().equals(unit.getId())) continue;
+            list.add(h);
+        }
+
+        return list;
     }
 
     //endregion

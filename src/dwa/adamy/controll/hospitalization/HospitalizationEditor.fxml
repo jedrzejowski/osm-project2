@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import dwa.adamy.ui.prop.*?>
+
+<?import dwa.adamy.controll.patient.PatientFinder?>
+<?import dwa.adamy.controll.hospitalization.HospitalizationList?>
+<fx:root type="VBox" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+
+        <HospitalizationUnitProp fx:id="hospitalizationUnitProp"
+                                 label="Jednostka hospitalizacji"/>
+
+        <DateProp fx:id="fromDateProp" label="Od daty:"/>
+        <TimeProp fx:id="fromTimeProp" label="Od godziny:"/>
+
+        <DateProp fx:id="toDateProp" label="Do daty:"/>
+        <TimeProp fx:id="toTimeProp" label="Do godziny:"/>
+
+        <PatientFinder fx:id="patientFinder"/>
+
+        <HBox alignment="TOP_RIGHT">
+            <children>
+                <Button onAction="#cancelAction" text="Anuluj"/>
+                <Button onAction="#saveAction" text="Zapisz"/>
+            </children>
+        </HBox>
+
+
+    </children>
+
+</fx:root>

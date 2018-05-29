@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="BorderPane" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1"
+
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+    <top>
+
+        <DatePicker fx:id="datePicker"/>
+
+    </top>
+
+    <center>
+        <ScrollPane>
+            <content>
+
+                <HBox fx:id="content">
+
+
+                </HBox>
+
+            </content>
+        </ScrollPane>
+    </center>
+
+</fx:root>

@@ -5,21 +5,19 @@ import dwa.adamy.controll.examination.ExaminationEditor;
 import dwa.adamy.controll.examination.ExaminationList;
 import dwa.adamy.database.Database;
 import dwa.adamy.database.Examination;
-import dwa.adamy.lib.DateUtils;
 import dwa.adamy.modules.Module;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class BadaniaModule extends Module {
 
     public enum State {
         LIST,
-        NEWEXAMINATION,
-        EDITEXAMINATION
+        NEW,
+        EDIT
     }
 
     @FXML
@@ -51,19 +49,20 @@ public class BadaniaModule extends Module {
                         Examination e = new Examination();
                         e.setDate(date);
                         e.setTime(time);
-                        setState(State.NEWEXAMINATION, e);
+                        setState(State.NEW, e);
                     }
 
                     @Override
                     public void onEdit(Examination examination) {
-                        setState(State.EDITEXAMINATION, examination);
+                        setState(State.EDIT, examination);
                     }
                 }, date);
+                getChildren().clear();
                 getChildren().add(list);
                 break;
             }
 
-            case NEWEXAMINATION: {
+            case NEW: {
                 LocalDate date = ((Examination) data).getDate();
 
                 ExaminationEditor editor = new ExaminationEditor(new ExaminationEditor.Interface() {
@@ -80,11 +79,12 @@ public class BadaniaModule extends Module {
                 });
 
                 editor.setExamination((Examination) data);
+                getChildren().clear();
                 getChildren().add(editor);
                 break;
             }
 
-            case EDITEXAMINATION: {
+            case EDIT: {
                 LocalDate date = ((Examination) data).getDate();
 
                 ExaminationEditor editor = new ExaminationEditor(new ExaminationEditor.Interface() {
@@ -99,6 +99,7 @@ public class BadaniaModule extends Module {
                     }
                 });
                 editor.setExamination((Examination) data);
+                getChildren().clear();
                 getChildren().add(editor);
                 break;
             }
