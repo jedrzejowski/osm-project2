@@ -35,7 +35,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         ourInstance = this;
 
-        Parent root = FXMLLoader.load(getClass().getResource("ui/MainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         leftPane = (Pane) root.lookup("#leftPane");
         rightPane = (Pane) root.lookup("#rightPane");
 
