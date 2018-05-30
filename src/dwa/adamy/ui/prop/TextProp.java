@@ -94,7 +94,7 @@ public class TextProp extends HBox {
 
         String toString(Object value);
 
-        boolean onChange(String oldValue, String newValue);
+        boolean     onChange(String oldValue, String newValue);
     }
 
     public static InputI DefaultInputI = new InputI() {
