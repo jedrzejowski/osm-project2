@@ -6,10 +6,7 @@ import dwa.adamy.database.Pesel;
 import dwa.adamy.ui.prop.TextProp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 public class PatientEditForm extends VBox {
 

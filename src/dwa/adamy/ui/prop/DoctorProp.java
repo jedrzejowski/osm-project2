@@ -6,12 +6,8 @@ import dwa.adamy.database.Doctor;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-
-import javax.print.Doc;
-import java.time.LocalDate;
 
 public class DoctorProp extends HBox {
 

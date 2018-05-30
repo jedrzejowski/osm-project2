@@ -1,16 +1,11 @@
 package dwa.adamy.ui.prop;
 
 import dwa.adamy.database.Pesel;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.InputMethodRequests;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;

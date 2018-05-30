@@ -17,7 +17,6 @@
 
     <center>
         <ScrollPane>
-            <content>
 
                 <GridPane fx:id="contentGrid"
                           xmlns="http://javafx.com/javafx/8.0.121"
@@ -36,24 +35,21 @@
                         <RowConstraints/>
                     </rowConstraints>
 
-                    <children>
-                        <Label text="Godzina" GridPane.columnIndex="0"
-                               GridPane.rowIndex="0" styleClass="header"/>
-                        <Label text="Nazwa badania" GridPane.columnIndex="1"
-                               GridPane.rowIndex="0" styleClass="header"/>
-                        <Label text="Zakres" GridPane.columnIndex="2"
-                               GridPane.rowIndex="0" styleClass="header"/>
-                        <Label text="Wyniki" GridPane.columnIndex="3"
-                               GridPane.rowIndex="0" styleClass="header"/>
-                        <Label text="Personel badający" styleClass="header"
-                               GridPane.columnIndex="4" GridPane.rowIndex="0"/>
-                        <Label text="Akcja" GridPane.columnIndex="5"
-                               GridPane.rowIndex="0" styleClass="header"/>
-                    </children>
+                    <Label text="Godzina" GridPane.columnIndex="0"
+                           GridPane.rowIndex="0" styleClass="header"/>
+                    <Label text="Nazwa badania" GridPane.columnIndex="1"
+                           GridPane.rowIndex="0" styleClass="header"/>
+                    <Label text="Zakres" GridPane.columnIndex="2"
+                           GridPane.rowIndex="0" styleClass="header"/>
+                    <Label text="Wyniki" GridPane.columnIndex="3"
+                           GridPane.rowIndex="0" styleClass="header"/>
+                    <Label text="Personel badający" styleClass="header"
+                           GridPane.columnIndex="4" GridPane.rowIndex="0"/>
+                    <Label text="Akcja" GridPane.columnIndex="5"
+                           GridPane.rowIndex="0" styleClass="header"/>
                 </GridPane>
 
-            </content>
-        </ScrollPane>
+            </ScrollPane>
     </center>
 
 </fx:root>

@@ -1,7 +1,6 @@
 package dwa.adamy;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 
 import java.io.IOException;

@@ -2,11 +2,8 @@ package dwa.adamy.database;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONPointer;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;

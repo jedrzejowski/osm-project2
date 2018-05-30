@@ -7,11 +7,8 @@
          alignment="CENTER_LEFT"
          xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
-    <children>
 
-        <Label fx:id="timeLabel" text="00:00"/>
-        <Label fx:id="patientLabel"/>
-
-    </children>
+    <Label fx:id="timeLabel" text="00:00"/>
+    <Label fx:id="patientLabel"/>
 
 </fx:root>

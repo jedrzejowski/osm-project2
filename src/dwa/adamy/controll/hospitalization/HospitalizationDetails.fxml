@@ -2,9 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import dwa.adamy.ui.prop.*?>
-
 <fx:root type="GridPane" xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
 
@@ -19,25 +16,21 @@
         <RowConstraints/>
     </rowConstraints>
 
-    <children>
+    <Label text="Pacjent:" GridPane.columnIndex="0"
+           GridPane.rowIndex="0" styleClass="info"/>
+    <Label text="Od:" GridPane.columnIndex="0"
+           GridPane.rowIndex="1" styleClass="info"/>
+    <Label text="Do:" GridPane.columnIndex="0"
+           GridPane.rowIndex="2" styleClass="info"/>
 
-        <Label text="Pacjent:" GridPane.columnIndex="0"
-               GridPane.rowIndex="0" styleClass="info"/>
-        <Label text="Od:" GridPane.columnIndex="0"
-               GridPane.rowIndex="1" styleClass="info"/>
-        <Label text="Do:" GridPane.columnIndex="0"
-               GridPane.rowIndex="2" styleClass="info"/>
-
-        <Label text="----" GridPane.columnIndex="1"
-               fx:id="patientLabel"
-               GridPane.rowIndex="0" styleClass="data"/>
-        <Label text="----" GridPane.columnIndex="1"
-               fx:id="fromLabel"
-               GridPane.rowIndex="1" styleClass="data"/>
-        <Label text="----" GridPane.columnIndex="1"
-               fx:id="toLabel"
-               GridPane.rowIndex="2" styleClass="data"/>
-
-    </children>
+    <Label text="----" GridPane.columnIndex="1"
+           fx:id="patientLabel"
+           GridPane.rowIndex="0" styleClass="data"/>
+    <Label text="----" GridPane.columnIndex="1"
+           fx:id="fromLabel"
+           GridPane.rowIndex="1" styleClass="data"/>
+    <Label text="----" GridPane.columnIndex="1"
+           fx:id="toLabel"
+           GridPane.rowIndex="2" styleClass="data"/>
 
 </fx:root>

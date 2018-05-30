@@ -8,31 +8,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root prefHeight="500" prefWidth="500" type="AnchorPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
+<fx:root prefHeight="500" prefWidth="500" type="AnchorPane"
+         AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+         xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1">
 
-        <VBox id="vbox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <VBox id="vbox" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
 
-            <children>
+        <HBox>
+            <Label text="Data:"/>
+            <DatePicker fx:id="datePicker"/>
+            <Label text="Pacjent:"/>
+            <PatientFinder fx:id="patientFinder"/>
+        </HBox>
 
-                <HBox>
-                    <children>
-                        <Label text="Data:" />
-                        <DatePicker fx:id="datePicker" />
-                        <Label text="Pacjent:" />
-                        <PatientFinder fx:id="patientFinder" />
-                    </children>
-                </HBox>
+        <ScrollPane>
+            <HBox fx:id="content"/>
+        </ScrollPane>
 
-                <ScrollPane>
-                    <content>
-                        <HBox fx:id="content" />
-                    </content>
-                </ScrollPane>
-
-            </children>
-        </VBox>
-
-    </children>
+    </VBox>
 
 </fx:root>

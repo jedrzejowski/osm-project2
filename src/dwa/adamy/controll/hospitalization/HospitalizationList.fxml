@@ -18,15 +18,13 @@
 
     <center>
         <ScrollPane>
-            <content>
 
                 <HBox fx:id="content">
 
 
                 </HBox>
 
-            </content>
-        </ScrollPane>
+            </ScrollPane>
     </center>
 
 </fx:root>

@@ -2,7 +2,6 @@ package dwa.adamy.ui.prop;
 
 import com.jfoenix.controls.JFXTimePicker;
 import dwa.adamy.Loader;
-import dwa.adamy.lib.DateUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;

@@ -5,17 +5,14 @@
 
 <fx:root type="VBox" xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
-    <children>
 
-        <VBox id="header">
-            <Label fx:id="label1" text="wtorek, 21 stycznia 2017"/>
-            <Label fx:id="label2" text="dr.Cisak"/>
-        </VBox>
+    <VBox id="header">
+        <Label fx:id="label1" text="wtorek, 21 stycznia 2017"/>
+        <Label fx:id="label2" text="dr.Cisak"/>
+    </VBox>
 
-        <VBox fx:id="content">
+    <VBox fx:id="content">
 
-        </VBox>
-
-    </children>
+    </VBox>
 
 </fx:root>
