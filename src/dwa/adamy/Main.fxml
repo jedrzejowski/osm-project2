@@ -5,21 +5,28 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import dwa.adamy.ui.ModuleChooser?>
+<?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121"
+<?import javafx.scene.control.Label?>
+<BorderPane prefHeight="600.0" prefWidth="950.0"
+            xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="dwa.adamy.Main">
-    <children>
 
-        <Pane id="leftPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <ModuleChooser />
-            </children>
-        </Pane>
+    <left>
+        <ModuleChooser prefWidth="200.0"/>
+    </left>
 
-        <AnchorPane id="rightPane" prefHeight="478.0" prefWidth="578.0" AnchorPane.bottomAnchor="0.0"
-              AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+    <center>
+        <AnchorPane id="rightPane"/>
+    </center>
 
+    <bottom>
+        <BorderPane>
+            <right>
 
-    </children>
-</AnchorPane>
+                <Label text="by Adam Jedrzejowski&lt;adam@jedrzejowski> and Adam Cisak&lt;adam0cisak@gmail.com>"/>
+            </right>
+        </BorderPane>
+    </bottom>
+
+</BorderPane>

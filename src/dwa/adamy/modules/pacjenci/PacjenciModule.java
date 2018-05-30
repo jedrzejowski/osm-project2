@@ -6,18 +6,16 @@ import dwa.adamy.controll.patient.PatientList;
 import dwa.adamy.database.Database;
 import dwa.adamy.database.Patient;
 import dwa.adamy.modules.Module;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 
 public class PacjenciModule extends Module {
 
     public enum State {
         LIST,
-        NEWPATIENT,
-        EDITPATIENT
+        NEW,
+        EDIT
     }
 
     State myState;
@@ -48,12 +46,12 @@ public class PacjenciModule extends Module {
                 list.setInterface(new PatientList.Interface() {
                     @Override
                     public void onSelectPatient(Patient patient) {
-                        setState(State.EDITPATIENT, patient);
+                        setState(State.EDIT, patient);
                     }
 
                     @Override
                     public void onNewPatient() {
-                        setState(State.NEWPATIENT);
+                        setState(State.NEW);
                     }
                 });
 
@@ -62,7 +60,7 @@ public class PacjenciModule extends Module {
 
                 break;
 
-            case NEWPATIENT: {
+            case NEW: {
 
                 PatientEditForm editor = new PatientEditForm();
                 editor.setInterface(new PatientEditForm.Interface() {
@@ -89,7 +87,7 @@ public class PacjenciModule extends Module {
             }
 
 
-            case EDITPATIENT: {
+            case EDIT: {
 
                 PatientEditForm editor = new PatientEditForm();
                 editor.setPatient((Patient) data);
