@@ -2,6 +2,10 @@
 
 VisitRow {
 	-fx-padding: $padding;
+	-fx-pref-height: $gridRowHeight;
+
+	Label {
+	}
 
 	#timeLabel {
 		-fx-font-weight: bold;
@@ -9,10 +13,10 @@ VisitRow {
 	}
 
 	&.even {
-		-fx-background-color: $colorGreen;
+		-fx-background-color: $rowEvenBg;
 	}
 
 	&.odd {
-		-fx-background-color: $colorGreen2;
+		-fx-background-color: $rowOddBg;
 	}
 }

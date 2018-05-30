@@ -106,11 +106,9 @@ public class HospitalizationUnitViewer extends VBox {
                 (1 + h.getFromTime().getHour() * 2 + (h.getFromTime().getMinute() < 30 ? 0 : 1));
 
         int indexEnd = h.getToDate().isAfter(date) ? gridPane.getRowConstraints().size() - 1 :
-                (1 + h.getToTime().getHour() * 2 + (h.getToTime().getMinute() == 0 ? 0 : (h.getToTime().getMinute() < 30 ? 1 : 2)));
+                (h.getToTime().getHour() * 2 + (h.getToTime().getMinute() == 0 ? 0 : (h.getToTime().getMinute() < 30 ? 1 : 2)));
 
         int span = indexEnd - indexStart + 1;
-
-        System.out.println(span);
 
         Label timeLabel = timeLabelList.get(indexStart - 1);
         BorderPane borderPane = contentList.get(indexStart - 1);
@@ -118,10 +116,9 @@ public class HospitalizationUnitViewer extends VBox {
 
         timeLabel.getParent().getStyleClass().add("busy");
 
-        VBox box = new VBox();
-        box.getStyleClass().add(span % 2 == 1 ? "odd" : "even");
-        box.getChildren().add(new Label("Pacjent: " + h.getPatient()));
-        borderPane.setCenter(box);
+        HospitalizationDetails details = new HospitalizationDetails(h);
+        details.getStyleClass().add(span % 2 == 1 ? "odd" : "even");
+        borderPane.setCenter(details);
         GridPane.setRowSpan(borderPane, span);
         borderPane.getStyleClass().add("busy");
 

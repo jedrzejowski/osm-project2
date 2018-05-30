@@ -29,7 +29,6 @@ public class ExaminationList extends BorderPane {
         Loader.loadFX(this);
         this.anInterface = anInterface;
 
-        int lastI = contentGrid.getColumnConstraints().size() - 1;
         boolean odd = false;
         BorderPane pane;
 
@@ -44,9 +43,15 @@ public class ExaminationList extends BorderPane {
 
                     Label timeLabel = new Label();
                     timeLabel.setText(String.format("%02d:%02d", h, m));
+                    timeLabel.getStyleClass().add("timeLabel");
 
                     pane.setCenter(timeLabel);
                     contentGrid.add(pane, 0, i);
+                }
+
+                {
+                    for (int c = 1; c < 5; c++)
+                        setLabel("", c, i);
                 }
 
                 {
@@ -58,7 +63,7 @@ public class ExaminationList extends BorderPane {
                     actions.add(action);
 
                     pane.setCenter(action);
-                    contentGrid.add(pane, lastI, i);
+                    contentGrid.add(pane, 5, i);
                 }
 
                 odd = !odd;
@@ -85,19 +90,29 @@ public class ExaminationList extends BorderPane {
         }
     }
 
-    private BiHashMap<Integer, Integer, Label> labels = new BiHashMap<Integer, Integer, Label>();
-    private void setLabel(String txt, int col, int row){
+    private BiHashMap<Integer, Integer, Label> labels = new BiHashMap<>();
 
-        Label label = new Label(txt);
-        contentGrid.add(label, col, row);
-        label = labels.put(col, row, label);
-        contentGrid.getChildren().remove(label);
+    private void setLabel(String txt, int col, int row) {
+        if (labels.containsKeys(col, row)) {
+
+            labels.get(col, row).setText(txt);
+        } else {
+
+            Label label = new Label(txt);
+            labels.put(col, row, label);
+
+            BorderPane pane = new BorderPane();
+            pane.getStyleClass().add(row % 2 == 0 ? "odd" : "even");
+            pane.setCenter(label);
+            contentGrid.add(pane, col, row);
+        }
+
     }
 
     public void showExamination(Examination exam) {
         int rowI = (exam.getTime().getHour() - 8) * 4 + exam.getTime().getMinute() / 15 + 1;
 
-        setLabel(exam.getName(),1, rowI);
+        setLabel(exam.getName(), 1, rowI);
         setLabel(exam.getRange(), 2, rowI);
         setLabel(exam.getResult(), 3, rowI);
         setLabel(exam.getDoctor().getFullName(), 4, rowI);
@@ -119,10 +134,10 @@ public class ExaminationList extends BorderPane {
             });
         }
 
-        for (BiHashMap.Entry entry : labels)
-            contentGrid.getChildren().remove(entry.getValue());
+        for (BiHashMap.Entry<Integer, Integer, Label> entry : labels.entrySet()) {
+            entry.getValue().setText("");
+        }
 
-        labels.clear();
     }
 
     Interface anInterface;

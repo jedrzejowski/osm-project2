@@ -25,7 +25,6 @@ hs_err_pid*
 
 .idea/workspace.xml
 out/
-*.css
 *.css.map
 .sass-cache
 

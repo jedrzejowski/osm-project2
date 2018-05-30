@@ -1,0 +1,41 @@
+HospitalizationUnitViewer {
+  -fx-padding: 5px 6px;
+  -fx-spacing: 1px; }
+  HospitalizationUnitViewer #header {
+    -fx-background-color: #42d6ff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 5px 6px; }
+    HospitalizationUnitViewer #header Label {
+      -fx-text-fill: white; }
+    HospitalizationUnitViewer #header #label1 {
+      -fx-font-size: 1.3em; }
+    HospitalizationUnitViewer #header #label2 {
+      -fx-font-size: 1.2em; }
+  HospitalizationUnitViewer #gridPane {
+    -fx-hgap: 1px;
+    -fx-vgap: 1px; }
+    HospitalizationUnitViewer #gridPane > * {
+      -fx-pref-height: 35px; }
+    HospitalizationUnitViewer #gridPane > .even {
+      -fx-background-color: #79ff6c; }
+      HospitalizationUnitViewer #gridPane > .even.busy {
+        -fx-background-color: #FFC800; }
+    HospitalizationUnitViewer #gridPane > .odd {
+      -fx-background-color: #a7ff9f; }
+      HospitalizationUnitViewer #gridPane > .odd.busy {
+        -fx-background-color: #ffd333; }
+    HospitalizationUnitViewer #gridPane > Label.header {
+      -fx-background-color: #42d6ff;
+      -fx-text-fill: white;
+      -fx-font-weight: bold;
+      -fx-alignment: center;
+      -fx-pref-width: 9999px;
+      -fx-pref-height: 35px; }
+      HospitalizationUnitViewer #gridPane > Label.header Label {
+        -fx-text-fill: white; }
+    HospitalizationUnitViewer #gridPane > BorderPane > Label.timeLabel {
+      -fx-font-weight: bold; }
+
+/*# sourceMappingURL=HospitalizationUnitViewer.css.map */

@@ -1,0 +1,26 @@
+ExaminationList #contentGrid {
+  -fx-hgap: 1px;
+  -fx-vgap: 1px; }
+  ExaminationList #contentGrid > * {
+    -fx-pref-height: 35px; }
+  ExaminationList #contentGrid > .even {
+    -fx-background-color: #79ff6c; }
+    ExaminationList #contentGrid > .even.busy {
+      -fx-background-color: #FFC800; }
+  ExaminationList #contentGrid > .odd {
+    -fx-background-color: #a7ff9f; }
+    ExaminationList #contentGrid > .odd.busy {
+      -fx-background-color: #ffd333; }
+  ExaminationList #contentGrid .header {
+    -fx-background-color: #42d6ff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-padding: 5px 6px;
+    -fx-pref-width: 9999px; }
+    ExaminationList #contentGrid .header Label {
+      -fx-text-fill: white; }
+  ExaminationList #contentGrid > BorderPane > Label.timeLabel {
+    -fx-font-weight: bold; }
+
+/*# sourceMappingURL=ExaminationList.css.map */

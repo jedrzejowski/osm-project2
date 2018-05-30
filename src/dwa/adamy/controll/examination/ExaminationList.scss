@@ -11,10 +11,10 @@ ExaminationList {
 			-fx-pref-width: 9999px;
 		}
 
-		Label {
-
+		> BorderPane {
+			> Label.timeLabel {
+				-fx-font-weight: bold;
+			}
 		}
-
-
 	}
 }

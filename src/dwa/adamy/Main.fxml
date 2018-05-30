@@ -16,6 +16,7 @@
                 <ModuleChooser />
             </children>
         </Pane>
+
         <AnchorPane id="rightPane" prefHeight="478.0" prefWidth="578.0" AnchorPane.bottomAnchor="0.0"
               AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
 

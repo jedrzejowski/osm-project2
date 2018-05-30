@@ -4,6 +4,7 @@ VisitList {
 	-fx-min-width: 350px;
 	-fx-padding: $padding;
 
+	-fx-spacing: $spacing;
 
 	#header {
 		-fx-padding: $padding;
@@ -19,9 +20,13 @@ VisitList {
 			-fx-font-size: 1.3em;
 		}
 
-		#label1 {
+		#label2 {
 			-fx-font-size: 1.2em;
 		}
+	}
+
+	#content {
+		-fx-spacing: $spacing;
 	}
 
 }

@@ -3,11 +3,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root onMouseClicked="#mouseClicked" type="HBox" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root onMouseClicked="#mouseClicked" type="HBox"
+         alignment="CENTER_LEFT"
+         xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1">
     <children>
 
-        <Label fx:id="timeLabel" text="00:00" />
-        <Label fx:id="patientLabel" />
+        <Label fx:id="timeLabel" text="00:00"/>
+        <Label fx:id="patientLabel"/>
 
     </children>
 

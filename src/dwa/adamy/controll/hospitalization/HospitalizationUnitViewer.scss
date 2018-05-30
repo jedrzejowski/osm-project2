@@ -7,6 +7,14 @@ HospitalizationUnitViewer {
 	#header {
 		@include header;
 		-fx-padding: $padding;
+
+		#label1 {
+			-fx-font-size: 1.3em;
+		}
+
+		#label2 {
+			-fx-font-size: 1.2em;
+		}
 	}
 
 	#gridPane {
@@ -20,13 +28,13 @@ HospitalizationUnitViewer {
 
 		> BorderPane {
 			> Label.timeLabel {
+				-fx-font-weight: bold;
 			}
 
 			&.contentPane {
 
 			}
 		}
-
 
 	}
 }

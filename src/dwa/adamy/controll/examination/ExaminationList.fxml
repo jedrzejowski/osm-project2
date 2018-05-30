@@ -28,7 +28,7 @@
                         <ColumnConstraints prefWidth="150.0"/>
                         <ColumnConstraints prefWidth="150.0"/>
                         <ColumnConstraints prefWidth="100.0"/>
-                        <ColumnConstraints prefWidth="100.0"/>
+                        <ColumnConstraints prefWidth="140.0"/>
                         <ColumnConstraints prefWidth="100.0"/>
                     </columnConstraints>
 

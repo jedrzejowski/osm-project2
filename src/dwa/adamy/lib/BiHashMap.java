@@ -2,7 +2,7 @@ package dwa.adamy.lib;
 
 import java.util.*;
 
-public class BiHashMap<K1, K2, V> implements Iterable<BiHashMap.Entry> {
+public class BiHashMap<K1, K2, V>  {
 
     private final Map<K1, Map<K2, V>> mMap;
 
@@ -66,24 +66,19 @@ public class BiHashMap<K1, K2, V> implements Iterable<BiHashMap.Entry> {
         mMap.clear();
     }
 
-    @Override
-    public Iterator<Entry> iterator() {
-        return entrySet().iterator();
-    }
-
-    private Set<Entry> entrySet() {
-        Set<Entry> set = new HashSet<>();
+    public Set<Entry<K1, K2, V>> entrySet() {
+        Set<Entry<K1, K2, V>> set = new HashSet<>();
 
         for (Map.Entry<K1, Map<K2, V>> firstD : mMap.entrySet()) {
             for (Map.Entry<K2, V> secondD : firstD.getValue().entrySet()) {
-                set.add(new Entry(firstD.getKey(), secondD.getKey(), secondD.getValue()));
+                set.add(new Entry<>(firstD.getKey(), secondD.getKey(), secondD.getValue()));
             }
         }
 
         return set;
     }
 
-    public class Entry<K1, K2, V> {
+    public static class Entry<K1, K2, V> {
         private K1 key1;
         private K2 key2;
         private V value;

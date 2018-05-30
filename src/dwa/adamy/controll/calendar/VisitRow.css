@@ -1,0 +1,12 @@
+VisitRow {
+  -fx-padding: 5px 6px;
+  -fx-pref-height: 35px; }
+  VisitRow #timeLabel {
+    -fx-font-weight: bold;
+    -fx-padding: 0 5px 0 0; }
+  VisitRow.even {
+    -fx-background-color: #79ff6c; }
+  VisitRow.odd {
+    -fx-background-color: #a7ff9f; }
+
+/*# sourceMappingURL=VisitRow.css.map */

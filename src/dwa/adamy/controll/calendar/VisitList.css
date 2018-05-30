@@ -1,0 +1,19 @@
+VisitList {
+  -fx-min-width: 350px;
+  -fx-padding: 5px 6px;
+  -fx-spacing: 1px; }
+  VisitList #header {
+    -fx-padding: 5px 6px;
+    -fx-background-color: #42d6ff;
+    -fx-alignment: center; }
+    VisitList #header Label {
+      -fx-text-fill: white;
+      -fx-font-weight: bold; }
+    VisitList #header #label1 {
+      -fx-font-size: 1.3em; }
+    VisitList #header #label2 {
+      -fx-font-size: 1.2em; }
+  VisitList #content {
+    -fx-spacing: 1px; }
+
+/*# sourceMappingURL=VisitList.css.map */
