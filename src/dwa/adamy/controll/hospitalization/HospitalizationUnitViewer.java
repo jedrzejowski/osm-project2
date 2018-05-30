@@ -42,7 +42,10 @@ public class HospitalizationUnitViewer extends VBox {
         }
     }
 
+    private List<Label> timeLabelList = new ArrayList<>();
+    private List<BorderPane> contentList = new ArrayList<>();
     private List<Button> actionList = new ArrayList<>();
+
 
     private void initGrid() {
 
@@ -62,6 +65,8 @@ public class HospitalizationUnitViewer extends VBox {
                     timeLabel.getStyleClass().add("timeLabel");
                     timeLabel.setText(String.format("%02d:%02d", h, m));
 
+                    timeLabelList.add(timeLabel);
+
                     pane.setCenter(timeLabel);
                     gridPane.add(pane, 0, i);
                 }
@@ -69,9 +74,17 @@ public class HospitalizationUnitViewer extends VBox {
                 {
                     pane = new BorderPane();
                     pane.getStyleClass().add(odd ? "odd" : "even");
+                    pane.getStyleClass().add("contentPane");
+
+                    contentList.add(pane);
+                    gridPane.add(pane, 1, i);
+                }
+
+                {
+                    pane = new BorderPane();
+                    pane.getStyleClass().add(odd ? "odd" : "even");
 
                     Button action = new Button();
-                    action.getStyleClass().add(odd ? "odd" : "even");
                     action.setText("Dodaj");
                     action.setOnAction(actionEvent -> {
                         anInterface.onNew(date, time);
@@ -88,37 +101,42 @@ public class HospitalizationUnitViewer extends VBox {
     }
 
     private void insertHospitalization(Hospitalization h) {
-        System.out.println(h.getToTime());
-        System.out.println((1 + h.getToTime().getHour() * 2 + (h.getToTime().getMinute() < 30 ? 0 : 1)));
-//        System.out.println(h.getFromTime().getMinute());
 
         int indexStart = h.getFromDate().isBefore(date) ? 1 :
                 (1 + h.getFromTime().getHour() * 2 + (h.getFromTime().getMinute() < 30 ? 0 : 1));
 
         int indexEnd = h.getToDate().isAfter(date) ? gridPane.getRowConstraints().size() - 1 :
-                (1 + h.getToTime().getHour() * 2 +(h.getToTime().getMinute() == 0 ? 0 : (h.getToTime().getMinute() < 30 ? 1 : 2)));
+                (1 + h.getToTime().getHour() * 2 + (h.getToTime().getMinute() == 0 ? 0 : (h.getToTime().getMinute() < 30 ? 1 : 2)));
 
-        int span = indexEnd - indexStart+1;
+        int span = indexEnd - indexStart + 1;
 
         System.out.println(span);
 
+        Label timeLabel = timeLabelList.get(indexStart - 1);
+        BorderPane borderPane = contentList.get(indexStart - 1);
+        Button action = actionList.get(indexStart - 1);
+
+        timeLabel.getParent().getStyleClass().add("busy");
+
         VBox box = new VBox();
         box.getStyleClass().add(span % 2 == 1 ? "odd" : "even");
-
         box.getChildren().add(new Label("Pacjent: " + h.getPatient()));
+        borderPane.setCenter(box);
+        GridPane.setRowSpan(borderPane, span);
+        borderPane.getStyleClass().add("busy");
 
-        GridPane.setRowSpan(box, span);
-        gridPane.add(box, 1, indexStart);
-
-        Button action = actionList.get(indexStart - 1);
         action.setText("Edytuj");
-        GridPane.setRowSpan(action.getParent(), span);
         action.setOnAction(actionEvent -> {
             anInterface.onEdit(h);
         });
+        GridPane.setRowSpan(action.getParent(), span);
+        action.getParent().getStyleClass().add("busy");
 
-        for (int i = indexStart; i < indexEnd - 2; i++)
+        for (int i = indexStart; i < indexEnd; i++) {
+            timeLabelList.get(i).getParent().getStyleClass().add("busy");
+            contentList.get(i).setVisible(false);
             actionList.get(i).getParent().setVisible(false);
+        }
 
     }
 

@@ -18,7 +18,6 @@
                 <ColumnConstraints prefWidth="65.0"/>
                 <ColumnConstraints prefWidth="350.0"/>
                 <ColumnConstraints prefWidth="100.0"/>
-                <ColumnConstraints/>
             </columnConstraints>
 
             <rowConstraints>
@@ -27,11 +26,11 @@
 
             <children>
                 <Label text="Godzina" GridPane.columnIndex="0"
-                       GridPane.rowIndex="0"/>
+                       GridPane.rowIndex="0" styleClass="header"/>
                 <Label text="Dane" GridPane.columnIndex="1"
-                       GridPane.rowIndex="0"/>
+                       GridPane.rowIndex="0" styleClass="header"/>
                 <Label text="Akcja" GridPane.columnIndex="2"
-                       GridPane.rowIndex="0"/>
+                       GridPane.rowIndex="0" styleClass="header"/>
             </children>
 
         </GridPane>

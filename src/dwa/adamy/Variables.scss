@@ -1,12 +1,57 @@
-$paddingH:5px;
-$paddingV:6px;
+$paddingH: 5px;
+$paddingV: 6px;
 $padding: $paddingH $paddingV;
-
-
-
+$spacing: 1px;
 
 $colorBlue: #42d6ff;
 $textOnBlue: white;
 
 $colorGreen: #79ff6c;
 $colorGreen2: lighten($colorGreen, 10%);
+
+$colorYellow: #FFC800;
+$colorYellow2: lighten($colorYellow, 10%);
+
+$rowEvenBg: $colorGreen;
+$rowOddBg: $colorGreen2;
+
+@mixin header() {
+	-fx-background-color: $colorBlue;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-alignment: center;
+
+	Label {
+		-fx-text-fill: white;
+	}
+}
+
+$gridRowHeight:35px;
+
+@mixin gridStyle() {
+
+	-fx-hgap: $spacing;
+	-fx-vgap: $spacing;
+
+	> {
+		* {
+			-fx-pref-height: $gridRowHeight;
+		}
+
+		.even {
+			-fx-background-color: $rowEvenBg;
+
+			&.busy {
+				-fx-background-color: $colorYellow;
+			}
+		}
+
+		.odd {
+			-fx-background-color: $rowOddBg;
+
+			&.busy {
+				-fx-background-color: $colorYellow2;
+			}
+		}
+	}
+}

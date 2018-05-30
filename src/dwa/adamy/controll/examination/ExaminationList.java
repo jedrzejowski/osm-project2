@@ -3,6 +3,7 @@ package dwa.adamy.controll.examination;
 import dwa.adamy.Loader;
 import dwa.adamy.database.Database;
 import dwa.adamy.database.Examination;
+import dwa.adamy.lib.BiHashMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -23,27 +24,44 @@ public class ExaminationList extends BorderPane {
     private DatePicker datePicker;
 
     private List<Button> actions = new ArrayList<>();
-    private List<Label> labels = new ArrayList<>();
 
     public ExaminationList(Interface anInterface, LocalDate date) {
         Loader.loadFX(this);
         this.anInterface = anInterface;
 
         int lastI = contentGrid.getColumnConstraints().size() - 1;
+        boolean odd = false;
+        BorderPane pane;
 
         for (int h = 8, i = 1; h < 18; h++) {
             for (int m = 0; m < 60; m += 15, i++) {
                 contentGrid.getRowConstraints().add(new RowConstraints());
                 final LocalTime time = LocalTime.of(h, m, 0, 0);
 
-                Label timeLabel = new Label();
-                timeLabel.setText(String.format("%02d:%02d", h, m));
-                contentGrid.add(timeLabel, 0, i);
+                {
+                    pane = new BorderPane();
+                    pane.getStyleClass().add(odd ? "odd" : "even");
 
-                Button action = new Button();
-                action.getProperties().put("_time", time);
-                actions.add(action);
-                contentGrid.add(action, lastI, i);
+                    Label timeLabel = new Label();
+                    timeLabel.setText(String.format("%02d:%02d", h, m));
+
+                    pane.setCenter(timeLabel);
+                    contentGrid.add(pane, 0, i);
+                }
+
+                {
+                    pane = new BorderPane();
+                    pane.getStyleClass().add(odd ? "odd" : "even");
+
+                    Button action = new Button();
+                    action.getProperties().put("_time", time);
+                    actions.add(action);
+
+                    pane.setCenter(action);
+                    contentGrid.add(pane, lastI, i);
+                }
+
+                odd = !odd;
             }
         }
 
@@ -67,24 +85,22 @@ public class ExaminationList extends BorderPane {
         }
     }
 
+    private BiHashMap<Integer, Integer, Label> labels = new BiHashMap<Integer, Integer, Label>();
+    private void setLabel(String txt, int col, int row){
+
+        Label label = new Label(txt);
+        contentGrid.add(label, col, row);
+        label = labels.put(col, row, label);
+        contentGrid.getChildren().remove(label);
+    }
+
     public void showExamination(Examination exam) {
         int rowI = (exam.getTime().getHour() - 8) * 4 + exam.getTime().getMinute() / 15 + 1;
 
-        Label label = new Label(exam.getName());
-        contentGrid.add(label, 1, rowI);
-        labels.add(label);
-
-        label = new Label(exam.getRange());
-        contentGrid.add(label, 2, rowI);
-        labels.add(label);
-
-        label = new Label(exam.getResult());
-        contentGrid.add(label, 3, rowI);
-        labels.add(label);
-
-        label = new Label(exam.getDoctor().getFullName());
-        contentGrid.add(label, 4, rowI);
-        labels.add(label);
+        setLabel(exam.getName(),1, rowI);
+        setLabel(exam.getRange(), 2, rowI);
+        setLabel(exam.getResult(), 3, rowI);
+        setLabel(exam.getDoctor().getFullName(), 4, rowI);
 
         Button action = actions.get(rowI - 1);
         action.setText("Edytuj");
@@ -103,8 +119,8 @@ public class ExaminationList extends BorderPane {
             });
         }
 
-        for (Label label : labels)
-            contentGrid.getChildren().remove(label);
+        for (BiHashMap.Entry entry : labels)
+            contentGrid.getChildren().remove(entry.getValue());
 
         labels.clear();
     }

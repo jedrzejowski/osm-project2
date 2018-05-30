@@ -1,0 +1,20 @@
+@import "../../Variables";
+
+ExaminationList {
+
+	#contentGrid {
+		@include gridStyle();
+
+		.header {
+			@include header;
+			-fx-padding: $padding;
+			-fx-pref-width: 9999px;
+		}
+
+		Label {
+
+		}
+
+
+	}
+}

@@ -1,24 +1,32 @@
 @import "../../Variables";
 
 HospitalizationUnitViewer {
+	-fx-padding: $padding;
+	-fx-spacing: $spacing;
+
+	#header {
+		@include header;
+		-fx-padding: $padding;
+	}
 
 	#gridPane {
+		@include gridStyle();
+
+		> Label.header {
+			@include header;
+			-fx-pref-width: 9999px;
+			-fx-pref-height: $gridRowHeight;
+		}
 
 		> BorderPane {
+			> Label.timeLabel {
+			}
 
-			Label.timeLabel {
+			&.contentPane {
 
 			}
 		}
 
-		> {
-			.even {
-				-fx-background-color: $colorGreen;
-			}
 
-			.odd {
-				-fx-background-color: $colorGreen2;
-			}
-		}
 	}
 }

@@ -29,7 +29,7 @@
                         <ColumnConstraints prefWidth="150.0"/>
                         <ColumnConstraints prefWidth="100.0"/>
                         <ColumnConstraints prefWidth="100.0"/>
-                        <ColumnConstraints/>
+                        <ColumnConstraints prefWidth="100.0"/>
                     </columnConstraints>
 
                     <rowConstraints>
@@ -38,17 +38,17 @@
 
                     <children>
                         <Label text="Godzina" GridPane.columnIndex="0"
-                               GridPane.rowIndex="0"/>
+                               GridPane.rowIndex="0" styleClass="header"/>
                         <Label text="Nazwa badania" GridPane.columnIndex="1"
-                               GridPane.rowIndex="0"/>
+                               GridPane.rowIndex="0" styleClass="header"/>
                         <Label text="Zakres" GridPane.columnIndex="2"
-                               GridPane.rowIndex="0"/>
+                               GridPane.rowIndex="0" styleClass="header"/>
                         <Label text="Wyniki" GridPane.columnIndex="3"
-                               GridPane.rowIndex="0"/>
-                        <Label text="Personel badający"
+                               GridPane.rowIndex="0" styleClass="header"/>
+                        <Label text="Personel badający" styleClass="header"
                                GridPane.columnIndex="4" GridPane.rowIndex="0"/>
                         <Label text="Akcja" GridPane.columnIndex="5"
-                               GridPane.rowIndex="0"/>
+                               GridPane.rowIndex="0" styleClass="header"/>
                     </children>
                 </GridPane>
 
