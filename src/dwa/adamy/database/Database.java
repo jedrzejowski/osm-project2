@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,34 +37,10 @@ public class Database {
 
     private JSONObject toJSON() {
         JSONObject obj = new JSONObject();
-
-        {
-            JSONArray list = new JSONArray();
-            for (Patient p : patientList)
-                list.put(p.toJSON());
-            obj.put("patients", list);
-        }
-
-        {
-            JSONArray list = new JSONArray();
-            for (PlanVisit planVisit : planVisits)
-                list.put(planVisit.toJSON());
-            obj.put("planVisits", list);
-        }
-
-        {
-            JSONArray list = new JSONArray();
-            for (Hospitalization h : getHospitalizationList())
-                list.put(h.toJSON());
-            obj.put("hospitalizations", list);
-        }
-
-        {
-            JSONArray list = new JSONArray();
-            for (Examination e : examinationList)
-                list.put(e.toJSON());
-            obj.put("examinations", list);
-        }
+        obj.put("patients", patientList.stream().map(el -> el.toJSON()));
+        obj.put("planVisits", planVisits.stream().map(el -> el.toJSON()));
+        obj.put("hospitalizations", getHospitalizationList().stream().map(el -> el.toJSON()));
+        obj.put("examinations", examinationList.stream().map(el -> el.toJSON()));
 
         return obj;
     }
@@ -80,29 +57,18 @@ public class Database {
         try {
             JSONObject obj = new JSONObject(new String(Files.readAllBytes(path)));
 
-            if (obj.has("patients")) {
-                JSONArray patients = obj.getJSONArray("patients");
-                for (Object p : patients)
-                    patientList.add(new Patient((JSONObject) p));
-            }
+            if (obj.has("patients"))
+                obj.getJSONArray("patients").forEach(el -> patientList.add(new Patient((JSONObject) el)));
 
-            if (obj.has("examinations")) {
-                JSONArray examinations = obj.getJSONArray("examinations");
-                for (Object e : examinations)
-                    examinationList.add(new Examination((JSONObject) e));
-            }
+            if (obj.has("examinations"))
+                obj.getJSONArray("examinations").forEach(el -> examinationList.add(new Examination((JSONObject) el)));
 
-            if (obj.has("planVisits")) {
-                JSONArray visits = obj.getJSONArray("planVisits");
-                for (Object e : visits)
-                    planVisits.add(new PlanVisit((JSONObject) e));
-            }
+            if (obj.has("planVisits"))
+                obj.getJSONArray("planVisits").forEach(el -> planVisits.add(new PlanVisit((JSONObject) el)));
 
-            if (obj.has("hospitalizations")) {
-                JSONArray visits = obj.getJSONArray("hospitalizations");
-                for (Object e : visits)
-                    hospitalizationList.add(new Hospitalization((JSONObject) e));
-            }
+            if (obj.has("hospitalizations"))
+                obj.getJSONArray("hospitalizations").forEach(el -> hospitalizationList.add(new Hospitalization((JSONObject) el)));
+
 
         } catch (IOException e) {
             //throw new RuntimeException(e);
@@ -125,11 +91,14 @@ public class Database {
     }
 
     public Patient getPatientByID(String uniqueID) {
-        for (Patient patient : patientList) {
-            if (patient.getUniqueID().equals(uniqueID))
-                return patient;
-        }
-        return null;
+//        for (Patient patient : patientList) {
+//            if (patient.getUniqueID().equals(uniqueID))
+//                return patient;
+//        }
+//        return null;
+        return (Patient) patientList.stream()
+                .filter(patient -> patient.getUniqueID().equals(uniqueID))
+                .limit(1);
     }
 
     public List<Patient> findPatientsBySelector(String selector) {
@@ -188,11 +157,15 @@ public class Database {
     }
 
     public Doctor getDoctorByID(String id) {
-        for (Doctor doc : getDoctors()) {
-            if (doc.getId().equals(id))
-                return doc;
-        }
-        return null;
+//        for (Doctor doc : getDoctors()) {
+//            if (doc.getId().equals(id))
+//                return doc;
+//        }
+//        return null;
+        return (Doctor) getDoctors().stream()
+                .filter(doc -> doc.getId().equals(id))
+                .limit(1);
+
     }
 
     //endregion
@@ -218,10 +191,13 @@ public class Database {
     }
 
     public HospitalizationUnit getHospitalizationUnitByID(String value) {
-        for (HospitalizationUnit hUnit : getHospitalizationUnitList())
-            if (hUnit.getId().equals(value)) return hUnit;
-
-        return null;
+//        for (HospitalizationUnit hUnit : getHospitalizationUnitList())
+//            if (hUnit.getId().equals(value)) return hUnit;
+//
+//        return null;
+        return (HospitalizationUnit) getHospitalizationUnitList().stream()
+                .filter(el -> el.getId().equals(value))
+                .limit(1);
     }
 
     private List<Hospitalization> hospitalizationList = new ArrayList<>();
@@ -235,16 +211,20 @@ public class Database {
     }
 
     public List<Hospitalization> getHospitalizationListFromDate(LocalDate date, HospitalizationUnit unit) {
-        List<Hospitalization> list = new ArrayList<>();
-
-        for (Hospitalization h : getHospitalizationList()) {
-            if (h.getFromDate().isAfter(date)) continue;
-            if (h.getToDate().isBefore(date)) continue;
-            if (unit != null && !h.getUnitID().equals(unit.getId())) continue;
-            list.add(h);
-        }
-
-        return list;
+//        List<Hospitalization> list = new ArrayList<>();
+//
+//        for (Hospitalization h : getHospitalizationList()) {
+//            if (h.getFromDate().isAfter(date)) continue;
+//            if (h.getToDate().isBefore(date)) continue;
+//            if (unit != null && !h.getUnitID().equals(unit.getId())) continue;
+//            list.add(h);
+//        }
+//        return list;
+        return   getHospitalizationList().stream()
+                .filter(el -> !(el.getFromDate().isAfter(date)))
+                .filter(el -> !(el.getFromDate().isBefore(date)))
+                .filter(el -> !(unit != null && !el.getUnitID().equals(unit.getId())))
+                .collect(Collectors.toList());
     }
 
     //endregion
