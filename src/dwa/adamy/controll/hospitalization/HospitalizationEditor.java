@@ -60,9 +60,14 @@ public class HospitalizationEditor extends VBox {
     }
 
     @FXML
-    private void saveAction(ActionEvent event) {
+    private void saveAction(ActionEvent event){
         if (anInterface != null)
-            anInterface.onSave(getHospitalization());
+            try {
+                anInterface.onSave(getHospitalization());
+            }
+            catch (Exception a){
+                //dodać jakiś komunikat o błedzie
+            }
     }
 
     @FXML
@@ -75,7 +80,7 @@ public class HospitalizationEditor extends VBox {
     Interface anInterface;
 
     public interface Interface {
-        void onSave(Hospitalization hospitalization);
+        void onSave(Hospitalization hospitalization) throws Exception;
 
         void onCancel();
     }

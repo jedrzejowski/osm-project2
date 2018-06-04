@@ -206,8 +206,28 @@ public class Database {
         return hospitalizationList;
     }
 
-    public void addHospitalization(Hospitalization hospitalization) {
-        hospitalizationList.add(hospitalization);
+    public void addHospitalization(Hospitalization hospitalization) throws Exception{
+        //sprawdzić daty czy nie wchłania datami w całości i sprawdzić dokładniej w obrębie dnia
+        List<Hospitalization> hospitalizationEndInBeginDateList = hospitalizationList.stream()
+                .filter(h -> h.getToDate().equals(hospitalization.getFromDate()))
+                .collect(Collectors.toList());
+        List<Hospitalization> hospitalizationStartBEndDateList = hospitalizationList.stream()
+                .filter(h -> h.getFromDate().equals(hospitalization.getToDate()))
+                .collect(Collectors.toList());
+
+        if (hospitalizationEndInBeginDateList.stream().anyMatch(h -> h.getToTime().compareTo( hospitalization.getFromTime()) >= 1)
+                ||
+                hospitalizationStartBEndDateList.stream().anyMatch(h -> h.getFromTime().compareTo( hospitalization.getToTime()) <= -1)
+                ||
+                hospitalizationList.stream()
+                        .anyMatch(h -> h.getToDate().compareTo(hospitalization.getFromDate()) >= 1
+                        && h.getFromDate().compareTo(hospitalization.getToDate()) <= -1)
+                )
+        {
+            throw new Exception();
+        }
+        else
+            hospitalizationList.add(hospitalization); // tu sprawdzanie
     }
 
     public List<Hospitalization> getHospitalizationListFromDate(LocalDate date, HospitalizationUnit unit) {
@@ -234,6 +254,7 @@ public class Database {
     private List<PlanVisit> planVisits = new ArrayList<>();
 
     public void addPlanVisit(PlanVisit visit) {
+        // Tu dodać sprawdzanie
         planVisits.add(visit);
     }
 

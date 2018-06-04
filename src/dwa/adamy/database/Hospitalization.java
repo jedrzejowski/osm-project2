@@ -115,8 +115,8 @@ public class Hospitalization {
         setFromTime(fromTime);
     }
 
-    public void setTo(LocalDate fromTo, LocalTime toTime) {
-        setToDate(fromTo);
+    public void setTo(LocalDate fromDate, LocalTime toTime) {
+        setToDate(fromDate);
         setToTime(toTime);
     }
 }

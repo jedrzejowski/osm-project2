@@ -70,7 +70,7 @@ public class HospitalizacjeModule extends Module {
                         (Hospitalization) data,
                         new HospitalizationEditor.Interface() {
                             @Override
-                            public void onSave(Hospitalization hospitalization) {
+                            public void onSave(Hospitalization hospitalization) throws Exception{
                                 Database.getInstance().addHospitalization(hospitalization);
                                 setState(State.LIST, hospitalization.getFromDate());
                             }
@@ -92,7 +92,7 @@ public class HospitalizacjeModule extends Module {
                         (Hospitalization) data,
                         new HospitalizationEditor.Interface() {
                             @Override
-                            public void onSave(Hospitalization hospitalization) {
+                            public void onSave(Hospitalization hospitalization){
                                 setState(State.LIST, hospitalization.getFromDate());
                             }
 
