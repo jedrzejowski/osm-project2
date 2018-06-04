@@ -1,5 +1,6 @@
 package dwa.adamy.database;
 
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import dwa.adamy.exceptions.*;
 
 public class Database {
 
@@ -206,7 +208,7 @@ public class Database {
         return hospitalizationList;
     }
 
-    public void addHospitalization(Hospitalization hospitalization) throws Exception{
+    public void addHospitalization(Hospitalization hospitalization) throws OccupiedHospitalizationDateException {
         //sprawdzić daty czy nie wchłania datami w całości i sprawdzić dokładniej w obrębie dnia
         List<Hospitalization> hospitalizationEndInBeginDateList = hospitalizationList.stream()
                 .filter(h -> h.getToDate().equals(hospitalization.getFromDate()))
@@ -215,18 +217,16 @@ public class Database {
                 .filter(h -> h.getFromDate().equals(hospitalization.getToDate()))
                 .collect(Collectors.toList());
 
-        if (hospitalizationEndInBeginDateList.stream().anyMatch(h -> h.getToTime().compareTo( hospitalization.getFromTime()) >= 1)
+        if (hospitalizationEndInBeginDateList.stream().anyMatch(h -> h.getToTime().compareTo(hospitalization.getFromTime()) >= 1)
                 ||
-                hospitalizationStartBEndDateList.stream().anyMatch(h -> h.getFromTime().compareTo( hospitalization.getToTime()) <= -1)
+                hospitalizationStartBEndDateList.stream().anyMatch(h -> h.getFromTime().compareTo(hospitalization.getToTime()) <= -1)
                 ||
                 hospitalizationList.stream()
                         .anyMatch(h -> h.getToDate().compareTo(hospitalization.getFromDate()) >= 1
-                        && h.getFromDate().compareTo(hospitalization.getToDate()) <= -1)
-                )
-        {
-            throw new Exception();
-        }
-        else
+                                && h.getFromDate().compareTo(hospitalization.getToDate()) <= -1)
+                ) {
+            throw new OccupiedHospitalizationDateException();
+        } else
             hospitalizationList.add(hospitalization); // tu sprawdzanie
     }
 
@@ -240,7 +240,7 @@ public class Database {
 //            list.add(h);
 //        }
 //        return list;
-        return   getHospitalizationList().stream()
+        return getHospitalizationList().stream()
                 .filter(el -> !(el.getFromDate().isAfter(date)))
                 .filter(el -> !(el.getFromDate().isBefore(date)))
                 .filter(el -> !(unit != null && !el.getUnitID().equals(unit.getId())))

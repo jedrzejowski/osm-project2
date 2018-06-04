@@ -7,6 +7,7 @@ import dwa.adamy.database.Database;
 import dwa.adamy.database.Hospitalization;
 import dwa.adamy.database.HospitalizationUnit;
 import dwa.adamy.modules.Module;
+import dwa.adamy.exceptions.*;
 import javafx.scene.Node;
 
 import java.time.LocalDate;
@@ -70,7 +71,7 @@ public class HospitalizacjeModule extends Module {
                         (Hospitalization) data,
                         new HospitalizationEditor.Interface() {
                             @Override
-                            public void onSave(Hospitalization hospitalization) throws Exception{
+                            public void onSave(Hospitalization hospitalization) throws OccupiedHospitalizationDateException{
                                 Database.getInstance().addHospitalization(hospitalization);
                                 setState(State.LIST, hospitalization.getFromDate());
                             }
