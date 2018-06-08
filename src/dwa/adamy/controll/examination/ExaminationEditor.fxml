@@ -12,8 +12,8 @@
          xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
 
-    <DateProp fx:id="dateProp" label="Data badania:"/>
-    <TimeProp fx:id="timeProp" label="Godzina badania:"/>
+    <DateProp fx:id="dateProp" label="Data badania:" disable="true"/>
+    <TimeProp fx:id="timeProp" label="Godzina badania:" disable="true"/>
 
     <TextProp fx:id="nameProp" label="Nazwa badania:"/>
     <TextProp fx:id="rangeProp" label="Zakres badania:"/>

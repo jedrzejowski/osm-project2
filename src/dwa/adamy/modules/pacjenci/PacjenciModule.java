@@ -8,6 +8,7 @@ import dwa.adamy.database.Patient;
 import dwa.adamy.modules.Module;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 
 public class PacjenciModule extends Module {
@@ -69,11 +70,16 @@ public class PacjenciModule extends Module {
 
                         try {
                             Database.getInstance().addPatient(patient);
+                            setState(State.LIST);
                         } catch (Database.PatientAlreadyExistsException e) {
-                            //TODO Komunikat o istniejąceym pacjencie
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Błąd bazydanych");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Pacjent o takim peselu istnieje");
+
+                            alert.showAndWait();
                         }
 
-                        setState(State.LIST);
                     }
 
                     @Override

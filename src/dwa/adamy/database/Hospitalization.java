@@ -42,6 +42,7 @@ public class Hospitalization {
         return unitID;
     }
 
+
     public HospitalizationUnit getUnit() {
         return Database.getInstance().getHospitalizationUnitByID(unitID);
     }
@@ -67,6 +68,7 @@ public class Hospitalization {
     }
 
     public void setPatient(Patient patient) {
+        if (patient == null) setPatientID("");
         setPatientID(patient.getUniqueID());
     }
 

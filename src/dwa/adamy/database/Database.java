@@ -11,11 +11,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
-import dwa.adamy.exceptions.*;
+
 
 public class Database {
 
@@ -39,10 +39,18 @@ public class Database {
 
     private JSONObject toJSON() {
         JSONObject obj = new JSONObject();
-        obj.put("patients", patientList.stream().map(el -> el.toJSON()));
-        obj.put("planVisits", planVisits.stream().map(el -> el.toJSON()));
-        obj.put("hospitalizations", getHospitalizationList().stream().map(el -> el.toJSON()));
-        obj.put("examinations", examinationList.stream().map(el -> el.toJSON()));
+        obj.put("patients",
+                new JSONArray(getPatientList().stream()
+                        .map(el -> el.toJSON()).collect(Collectors.toList())));
+        obj.put("planVisits",
+                new JSONArray(getPlanVisits().stream()
+                        .map(el -> el.toJSON()).collect(Collectors.toList())));
+        obj.put("hospitalizations",
+                new JSONArray(getHospitalizationList().stream()
+                        .map(el -> el.toJSON()).collect(Collectors.toList())));
+        obj.put("examinations",
+                new JSONArray(getExaminationList().stream()
+                        .map(el -> el.toJSON()).collect(Collectors.toList())));
 
         return obj;
     }
@@ -93,23 +101,27 @@ public class Database {
     }
 
     public Patient getPatientByID(String uniqueID) {
-//        for (Patient patient : patientList) {
-//            if (patient.getUniqueID().equals(uniqueID))
-//                return patient;
-//        }
-//        return null;
-        return (Patient) patientList.stream()
+        return patientList.stream()
                 .filter(patient -> patient.getUniqueID().equals(uniqueID))
-                .limit(1);
+                .findFirst().orElse(null);
     }
 
-    public List<Patient> findPatientsBySelector(String selector) {
-        //TODO napisać tą funkcje
-        return patientList;
-    }
+    public void addPatient(Patient newPatient) throws PatientAlreadyExistsException {
 
-    public void addPatient(Patient patient) throws PatientAlreadyExistsException {
-        patientList.add(patient);
+        if (newPatient.getPesel().isValid()) {
+
+            AtomicBoolean exists = new AtomicBoolean(false);
+
+            patientList.forEach(patient -> {
+                if (!patient.getPesel().isValid()) return;
+                if (patient.getPesel().equals(newPatient.getPesel()))
+                    exists.set(true);
+            });
+
+            if (exists.get()) throw new PatientAlreadyExistsException();
+        }
+
+        patientList.add(newPatient);
     }
 
     public class PatientAlreadyExistsException extends Exception {
@@ -159,14 +171,9 @@ public class Database {
     }
 
     public Doctor getDoctorByID(String id) {
-//        for (Doctor doc : getDoctors()) {
-//            if (doc.getId().equals(id))
-//                return doc;
-//        }
-//        return null;
-        return (Doctor) getDoctors().stream()
+        return getDoctors().stream()
                 .filter(doc -> doc.getId().equals(id))
-                .limit(1);
+                .findFirst().orElse(null);
 
     }
 
@@ -193,13 +200,10 @@ public class Database {
     }
 
     public HospitalizationUnit getHospitalizationUnitByID(String value) {
-//        for (HospitalizationUnit hUnit : getHospitalizationUnitList())
-//            if (hUnit.getId().equals(value)) return hUnit;
-//
-//        return null;
-        return (HospitalizationUnit) getHospitalizationUnitList().stream()
+
+        return getHospitalizationUnitList().stream()
                 .filter(el -> el.getId().equals(value))
-                .limit(1);
+                .findFirst().orElse(null);
     }
 
     private List<Hospitalization> hospitalizationList = new ArrayList<>();
@@ -208,41 +212,42 @@ public class Database {
         return hospitalizationList;
     }
 
-    public void addHospitalization(Hospitalization hospitalization) throws OccupiedHospitalizationDateException {
+    public boolean isHospitalizationTimeGood(Hospitalization target) {
         //sprawdzić daty czy nie wchłania datami w całości i sprawdzić dokładniej w obrębie dnia
         List<Hospitalization> hospitalizationEndInBeginDateList = hospitalizationList.stream()
-                .filter(h -> h.getToDate().equals(hospitalization.getFromDate()))
+                .filter(h -> h.getToDate().equals(target.getFromDate()))
                 .collect(Collectors.toList());
         List<Hospitalization> hospitalizationStartBEndDateList = hospitalizationList.stream()
-                .filter(h -> h.getFromDate().equals(hospitalization.getToDate()))
+                .filter(h -> h.getFromDate().equals(target.getToDate()))
                 .collect(Collectors.toList());
 
-        if (hospitalizationEndInBeginDateList.stream().anyMatch(h -> h.getToTime().compareTo(hospitalization.getFromTime()) >= 1)
+        if (hospitalizationEndInBeginDateList.stream().anyMatch(h -> h.getToTime().compareTo(target.getFromTime()) >= 0
+                && h.getFromTime().compareTo(target.getToTime()) <= 0)
                 ||
-                hospitalizationStartBEndDateList.stream().anyMatch(h -> h.getFromTime().compareTo(hospitalization.getToTime()) <= -1)
+                hospitalizationStartBEndDateList.stream().anyMatch(h -> h.getFromTime().compareTo(target.getToTime()) <= 0
+                        && h.getToTime().compareTo(target.getFromTime()) >= 0)
                 ||
                 hospitalizationList.stream()
-                        .anyMatch(h -> h.getToDate().compareTo(hospitalization.getFromDate()) >= 1
-                                && h.getFromDate().compareTo(hospitalization.getToDate()) <= -1)
+                        .anyMatch(h -> h.getToDate().compareTo(target.getFromDate()) >= 1
+                                && h.getFromDate().compareTo(target.getToDate()) <= -1)
                 ) {
+            return false;
+        } else return true;
+    }
+
+    public void addHospitalization(Hospitalization hospitalization) throws OccupiedHospitalizationDateException {
+        if (!isHospitalizationTimeGood(hospitalization))
             throw new OccupiedHospitalizationDateException();
-        } else
-            hospitalizationList.add(hospitalization); // tu sprawdzanie
+        hospitalizationList.add(hospitalization);
+    }
+
+    public class OccupiedHospitalizationDateException extends Exception {
     }
 
     public List<Hospitalization> getHospitalizationListFromDate(LocalDate date, HospitalizationUnit unit) {
-//        List<Hospitalization> list = new ArrayList<>();
-//
-//        for (Hospitalization h : getHospitalizationList()) {
-//            if (h.getFromDate().isAfter(date)) continue;
-//            if (h.getToDate().isBefore(date)) continue;
-//            if (unit != null && !h.getUnitID().equals(unit.getId())) continue;
-//            list.add(h);
-//        }
-//        return list;
         return getHospitalizationList().stream()
-                .filter(el -> !(el.getFromDate().isAfter(date)))
-                .filter(el -> !(el.getFromDate().isBefore(date)))
+                .filter(el -> !el.getFromDate().isAfter(date))
+                .filter(el -> !el.getToDate().isBefore(date))
                 .filter(el -> !(unit != null && !el.getUnitID().equals(unit.getId())))
                 .collect(Collectors.toList());
     }
@@ -253,8 +258,11 @@ public class Database {
 
     private List<PlanVisit> planVisits = new ArrayList<>();
 
+    public List<PlanVisit> getPlanVisits() {
+        return planVisits;
+    }
+
     public void addPlanVisit(PlanVisit visit) {
-        // Tu dodać sprawdzanie
         planVisits.add(visit);
     }
 

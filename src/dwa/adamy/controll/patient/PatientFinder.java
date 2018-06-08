@@ -12,10 +12,6 @@ import javafx.scene.layout.HBox;
 public class PatientFinder extends HBox {
     @FXML
     private ComboBox<Patient> combo;
-    @FXML
-    private Button button;
-
-    private String lastVal = "";
 
     public PatientFinder() {
         Loader.loadFX(this);

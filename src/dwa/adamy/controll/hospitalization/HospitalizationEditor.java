@@ -2,11 +2,12 @@ package dwa.adamy.controll.hospitalization;
 
 import dwa.adamy.Loader;
 import dwa.adamy.controll.patient.PatientFinder;
+import dwa.adamy.database.Database;
 import dwa.adamy.database.Hospitalization;
+import dwa.adamy.ui.Dialog;
 import dwa.adamy.ui.prop.DateProp;
 import dwa.adamy.ui.prop.HospitalizationUnitProp;
 import dwa.adamy.ui.prop.TimeProp;
-import dwa.adamy.exceptions.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
@@ -61,14 +62,25 @@ public class HospitalizationEditor extends VBox {
     }
 
     @FXML
-    private void saveAction(ActionEvent event){
-        if (anInterface != null)
-            try {
-                anInterface.onSave(getHospitalization());
+    private void saveAction(ActionEvent event) {
+        if (anInterface != null) {
+
+            Hospitalization temp = new Hospitalization();
+
+            temp.setID(hospitalization.getID());
+            temp.setUnit(hospitalizationUnitProp.getValue());
+            temp.setFromDate(fromDateProp.getValue());
+            temp.setFromTime(fromTimeProp.getValue());
+            temp.setToDate(toDateProp.getValue());
+            temp.setToTime(toTimeProp.getValue());
+
+            if (!Database.getInstance().isHospitalizationTimeGood(temp)) {
+                Dialog.showHospitalizationError();
+                return;
             }
-            catch (OccupiedHospitalizationDateException a){
-                //dodać jakiś komunikat o błedzie
-            }
+
+            anInterface.onSave(getHospitalization());
+        }
     }
 
     @FXML
@@ -81,7 +93,7 @@ public class HospitalizationEditor extends VBox {
     Interface anInterface;
 
     public interface Interface {
-        void onSave(Hospitalization hospitalization) throws OccupiedHospitalizationDateException;
+        void onSave(Hospitalization hospitalization);
 
         void onCancel();
     }

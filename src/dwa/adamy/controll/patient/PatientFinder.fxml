@@ -4,11 +4,12 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root type="HBox" xmlns="http://javafx.com/javafx/8.0.121"
+<?import javafx.scene.control.Label?>
+<fx:root type="HBox" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
 
-    <ComboBox fx:id="combo" prefWidth="150.0"/>
+    <Label fx:id="label" minWidth="175" prefHeight="30.0" text="Pacjent"/>
 
-    <Button fx:id="button" text="Szukaj"/>
+    <ComboBox fx:id="combo" prefWidth="150.0"/>
 
 </fx:root>

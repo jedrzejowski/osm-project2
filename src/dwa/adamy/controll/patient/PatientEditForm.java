@@ -3,6 +3,7 @@ package dwa.adamy.controll.patient;
 import dwa.adamy.Loader;
 import dwa.adamy.database.Patient;
 import dwa.adamy.database.Pesel;
+import dwa.adamy.ui.Dialog;
 import dwa.adamy.ui.prop.TextProp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,9 +43,21 @@ public class PatientEditForm extends VBox {
     private void validateAndSavePatient() {
         if (patient == null) patient = new Patient();
 
-        //TODO tu trzeba logike czy dane są poprawne
+        Pesel pesel = (Pesel) peselProp.getValue();
 
-        patient.setPesel((Pesel) peselProp.getValue());
+        try {
+            if (pesel.toString().length() > 0 && !pesel.isValid())
+                throw new Exception("Błędny pesel");
+
+
+        } catch (Exception e) {
+
+            Dialog.showPatientError();
+
+            return;
+        }
+
+        patient.setPesel(pesel);
         patient.setName1(imieProp.getValue().toString());
         patient.setName2(nazwiskoProp.getValue().toString());
 
