@@ -51,9 +51,15 @@ Moduł badań i zabiegów, podobie jak w terimnarzu, można zapisać pacjentów 
 
 Moduł hospitalizacji
 
+##### Lista
+![Lista](pic/module-4-1.png)
+
+##### Edycja
+![Edycja](pic/module-4-2.png)
+
 ## Baza danych
 
-Przykładowy plik bazy danych można pobrać [tu]()
+Baza danych jest zapisywana w pliku JSON. Jej odczyt i zapis jest wykonywany podczas uruchomiania programu. Zapis można również wykonać na żądanie użytkownika. 
 
 ## Biblioteki
 

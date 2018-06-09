@@ -3,5 +3,4 @@
 out/
 *.css.map
 .sass-cache
-
-database.json
+lib/jfoenix-9.0.4.jar

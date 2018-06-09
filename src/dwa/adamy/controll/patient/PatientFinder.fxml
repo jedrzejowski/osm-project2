@@ -8,7 +8,7 @@
 <fx:root type="HBox" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.121"
          xmlns:fx="http://javafx.com/fxml/1">
 
-    <Label fx:id="label" minWidth="175" prefHeight="30.0" text="Pacjent"/>
+    <Label fx:id="label" minWidth="175" prefHeight="30.0" text="Pacjent:"/>
 
     <ComboBox fx:id="combo" prefWidth="150.0"/>
 

@@ -21,7 +21,6 @@
         <HBox>
             <Label text="Data:"/>
             <DatePicker fx:id="datePicker"/>
-            <Label text="Pacjent:"/>
             <PatientFinder fx:id="patientFinder"/>
         </HBox>
 

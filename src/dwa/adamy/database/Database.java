@@ -15,6 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Database {
@@ -213,11 +214,13 @@ public class Database {
     }
 
     public boolean isHospitalizationTimeGood(Hospitalization target) {
+        List<Hospitalization> list = hospitalizationList.stream().filter(h -> !h.getUnitID().equals(target.getUnitID())).collect(Collectors.toList());
+
         //sprawdzić daty czy nie wchłania datami w całości i sprawdzić dokładniej w obrębie dnia
-        List<Hospitalization> hospitalizationEndInBeginDateList = hospitalizationList.stream()
+        List<Hospitalization> hospitalizationEndInBeginDateList = list.stream()
                 .filter(h -> h.getToDate().equals(target.getFromDate()))
                 .collect(Collectors.toList());
-        List<Hospitalization> hospitalizationStartBEndDateList = hospitalizationList.stream()
+        List<Hospitalization> hospitalizationStartBEndDateList = list.stream()
                 .filter(h -> h.getFromDate().equals(target.getToDate()))
                 .collect(Collectors.toList());
 
@@ -227,7 +230,7 @@ public class Database {
                 hospitalizationStartBEndDateList.stream().anyMatch(h -> h.getFromTime().compareTo(target.getToTime()) <= 0
                         && h.getToTime().compareTo(target.getFromTime()) >= 0)
                 ||
-                hospitalizationList.stream()
+                list.stream()
                         .anyMatch(h -> h.getToDate().compareTo(target.getFromDate()) >= 1
                                 && h.getFromDate().compareTo(target.getToDate()) <= -1)
                 ) {
